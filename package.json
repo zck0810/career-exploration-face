@@ -3,12 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "browser": {
+    "crypto": false
+  },
   "dependencies": {
+    "@jiaminghi/data-view": "^2.10.0",
+    "axios": "^1.5.1",
+    "base-64": "^1.0.0",
+    "bmob": "^2.1.0",
     "core-js": "^3.8.3",
+    "crypto-js": "^4.1.1",
+    "echarts": "^5.4.3",
+    "echarts-wordcloud": "^2.1.0",
+    "element-ui": "^2.15.14",
+    "hydrogen-js-sdk": "^2.2.3",
+    "vilike": "^0.2.2",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1"
   },
