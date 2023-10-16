@@ -4,7 +4,7 @@
 </template>
 <script>
 import * as echarts from 'echarts';
-import {getHotPosition} from "@/api/positionInformation";
+import {getHotPosition} from "@/api/liepin";
 export default {
   name:'hotPosition',
   mounted() {

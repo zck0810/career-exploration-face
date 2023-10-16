@@ -2,7 +2,7 @@
   <div id="cityPositionCount" style="width: 100%; height: 100%;"></div>
 </template>
 <script>
-import {getCityPositionCount} from "@/api/positionInformation";
+import {getCityPositionCount} from "@/api/liepin";
 import * as echarts from 'echarts';
 export default {
   name: "cityPositionCount",
@@ -22,12 +22,12 @@ export default {
         console.log(res)
         const cityList = [];
         const countList = [];
-        for (let i = 0; i < res.data.length-5; i++) {
+        for (let i = 0; i < res.data.length-10; i++) {
           const {
-            city,
+            city_prefix,
             count
           } = res.data[i];
-          cityList.push(city);
+          cityList.push(city_prefix);
           countList.push(count);
         }
         let dataAxis = cityList;

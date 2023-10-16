@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { getAllData } from '@/api/positionInformation'
 
 
 export default {
@@ -15,11 +14,7 @@ export default {
     }
   },
 
-  mounted () {
-    getAllData().then(res=>{
-      console.log(res)
-    })
-  }
+
 }
 
 </script>
