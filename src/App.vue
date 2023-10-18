@@ -6,6 +6,7 @@
         <router-link to="/jobSearch">职位查询</router-link> |
         <router-link to="/companySearch">公司查询</router-link> |
         <router-link to="/ChatGPT">AI问答助手</router-link>
+        <router-link to="/newChatgpt">问答助手</router-link>
         <span style="float: right; margin-right: 30px; color: black; font-size: 20px">当前系统访问量为：{{visitCount}}</span>
       </div>
     </nav>

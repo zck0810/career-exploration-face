@@ -57,7 +57,7 @@ li + li {
         </li>
       </ul>
     </div>
-    <el-input v-model="inputValue" placeholder="Please input" class="input-with-select">
+    <el-input v-model="inputValue" placeholder="Please input" class="input-with-select" @keyup.enter="sendmsg">
       <template #append>
         <el-button @click="sendmsg" type="primary">发送
         </el-button>
@@ -101,7 +101,7 @@ export default {
         content: this.inputValue,
         is_robot: 1
       })
-      const resp = await this.getChatGPTResponse()
+      const resp = this.gpt()
       this.answer.push({
         role: 'system',
         content: resp
