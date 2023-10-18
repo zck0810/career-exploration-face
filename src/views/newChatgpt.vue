@@ -101,7 +101,7 @@ export default {
         content: this.inputValue,
         is_robot: 1
       })
-      const resp = await this.getChatGPTResponse()
+      const resp = this.gpt()
       this.answer.push({
         role: 'system',
         content: resp
