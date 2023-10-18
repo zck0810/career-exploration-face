@@ -29,16 +29,6 @@ export default {
             color:  'rgb(0,255,234)',
           }
         },
-        toolbox: {
-          feature: {
-            saveAsImage: {
-              title: '下载图片',
-              iconStyle: {
-                color: 'rgb(0,255,234)',
-              }
-            },
-          }
-        },
         backgroundColor: 'rgba(0, 0, 0, 0.1)', // 设置背景透明度为 80%
         tooltip: {
           trigger: 'item'

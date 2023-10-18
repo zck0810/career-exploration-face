@@ -51,16 +51,6 @@ export default {
               color: 'rgb(0,216,255)'
             }
           },
-          toolbox: {
-            feature: {
-              saveAsImage: {
-                title: '下载图片',
-                iconStyle: {
-                  color: 'rgb(0,255,234)',
-                }
-              },
-            }
-          },
           xAxis: {
             data: dataAxis,
             axisLabel: {

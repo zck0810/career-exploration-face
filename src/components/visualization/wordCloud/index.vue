@@ -47,17 +47,6 @@ export default {
         tooltip: {
           trigger: 'item',
         },
-        toolbox: {
-          feature: {
-            saveAsImage: {
-              title: '下载图片',
-              iconStyle: {
-                color: 'rgb(0,255,234)',
-                right: 20,
-              }
-            },
-          }
-        },
         textStyle:{
           top: '30',
           color: function() {
