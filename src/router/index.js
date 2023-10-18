@@ -25,6 +25,11 @@ const routes = [
     name: 'ChatGPT',
     component: () => import('../views/ChatGPT.vue')
   },
+  {
+    path: '/newChatgpt',
+    name: 'newChatgpt',
+    component: () => import('../views/newChatgpt.vue')
+  }
 ]
 
 const router = new VueRouter({
