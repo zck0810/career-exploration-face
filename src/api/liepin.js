@@ -14,3 +14,12 @@ export function getHotPosition(){
     method:'get',
   })
 }
+
+//查询职位数据
+export function getPositionData(data) {
+  return request({
+    url:'/liepin/getPositionData',
+    method:'post',
+    data:data
+  })
+}
