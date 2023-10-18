@@ -6,12 +6,33 @@
 
 
 <script>
-import * as echarts from "echarts";
-import zhongguo from "@/assets/china.json"
+import * as echarts from 'echarts'
+import ChinaMap from '@/assets/china.json'
+import { getProvincePositionCount } from '@/api/provincePositionCount'
+
 export default {
+  data(){
+    return{
+      provincePositionCountData:[]
+    }
+  },
   created () {
     this.$nextTick(() => {
       this.initCharts();
+    })
+  },
+
+  mounted () {
+    getProvincePositionCount().then(res=>{
+      let provincePositionCount = res.data
+      provincePositionCount.forEach(item =>{
+        const {
+          positionCount,
+          province
+        } = item
+        this.provincePositionCountData.push({ 'name': province, 'value': positionCount})
+      })
+      console.log(this.provincePositionCountData)
     })
   },
   methods: {
@@ -52,8 +73,9 @@ export default {
             // 通常状态下的样式
             normal: {
               show: true,
+              fontSize: 10,
               textStyle: {
-                color: "#fff",
+                color: '#fff',
               },
             },
             // 鼠标放上去的样式
@@ -76,16 +98,16 @@ export default {
                 colorStops: [
                   {
                     offset: 0,
-                    color: "rgba(147, 235, 248, 0)", // 0% 处的颜色
+                    color: "rgba(147,235,248,0.25)", // 0% 处的颜色
                   },
                   {
                     offset: 1,
-                    color: "rgba(147, 235, 248, .2)", // 100% 处的颜色
+                    color: "rgba(147,235,248,0.55)", // 100% 处的颜色
                   },
                 ],
                 globalCoord: false, // 缺省为 false
               },
-              shadowColor: "rgba(128, 217, 248, 1)",
+              shadowColor: "rgba(128,217,248,0.16)",
               shadowOffsetX: -2,
               shadowOffsetY: 2,
               shadowBlur: 10,
@@ -97,48 +119,45 @@ export default {
             },
           },
         },
-        // series: [
-        //   {
-        //     type: "scatter",
-        //     coordinateSystem: "geo",
-        //     symbol: "pin",
-        //     legendHoverLink: true,
-        //     symbolSize: [60, 60],
-        //     // 这里渲染标志里的内容以及样式
-        //     label: {
-        //       show: true,
-        //       formatter(value) {
-        //         return value.data.value[2];
-        //       },
-        //       color: "#fff",
-        //     },
-        //     // 标志的样式
-        //     itemStyle: {
-        //       normal: {
-        //         color: "rgba(255,0,0,.7)",
-        //         shadowBlur: 2,
-        //         shadowColor: "D8BC37",
-        //       },
-        //     },
-        //     // 数据格式，其中name,value是必要的，value的前两个值是数据点的经纬度，其他的数据格式可以自定义
-        //     // 至于如何展示，完全是靠上面的formatter来自己定义的
-        //     data: [
-        //       { name: "西藏", value: [91.23, 29.5, 2333] },
-        //       { name: "黑龙江", value: [128.03, 47.01, 1007] },
-        //     ],
-        //     showEffectOn: "render",
-        //     rippleEffect: {
-        //       brushType: "stroke",
-        //     },
-        //     hoverAnimation: true,
-        //     zlevel: 1,
-        //   },
-        // ],
+        series: [
+          {
+            type: "scatter",
+            coordinateSystem: "geo",
+            symbol: "pin",
+            legendHoverLink: true,
+            symbolSize: [60, 60],
+            // 这里渲染标志里的内容以及样式
+            label: {
+              show: true,
+              formatter(value) {
+                return value.data.value[2];
+              },
+              color: "#fff",
+            },
+            // 标志的样式
+            itemStyle: {
+              normal: {
+                color: "rgba(255,0,0,.7)",
+                shadowBlur: 2,
+                shadowColor: "D8BC37",
+              },
+            },
+            // 数据格式，其中name,value是必要的，value的前两个值是数据点的经纬度，其他的数据格式可以自定义
+            // 至于如何展示，完全是靠上面的formatter来自己定义的
+            data: this.provincePositionCountData,
+            showEffectOn: "render",
+            rippleEffect: {
+              brushType: "stroke",
+            },
+            hoverAnimation: true,
+            zlevel: 1,
+          },
+        ],
 
 
 
       };
-      echarts.registerMap("china",zhongguo)
+      echarts.registerMap("china",ChinaMap)
 
       charts.setOption(option);
     },

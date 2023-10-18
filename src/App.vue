@@ -2,15 +2,20 @@
   <div id="app">
     <nav>
       <div style="margin-left: 20px;">
-        <router-link to="/">首页</router-link> |
-        <router-link to="/jobSearch">职位查询</router-link> |
-        <router-link to="/companySearch">公司查询</router-link> |
+        <router-link to="/">首页</router-link>
+        |
+        <router-link to="/jobSearch">职位查询</router-link>
+        |
+        <router-link to="/companySearch">公司查询</router-link>
+        |
         <router-link to="/ChatGPT">AI问答助手</router-link>
-        <router-link to="/newChatgpt">问答助手</router-link>
-        <span style="float: right; margin-right: 30px; color: black; font-size: 20px">当前系统访问量为：{{visitCount}}</span>
+        <router-link to="/newChatgpt">交互式AI问答助手</router-link>
+        <span
+          style="float: right; margin-right: 30px; color: black; font-size: 20px">当前系统访问量为：{{ visitCount }}</span>
       </div>
     </nav>
-    <router-view style="max-height: calc(100vh - 54px); height: calc(100vh - 54px); background-color: rgba(123,124,124,0.15);"/>
+    <router-view
+      style="max-height: calc(100vh - 54px); height: calc(100vh - 54px); background-color: rgba(123,124,124,0.15);"/>
   </div>
 </template>
 
@@ -18,13 +23,13 @@
 import { getVisitCount } from '@/api/visit'
 
 export default {
-  data(){
-    return{
-      visitCount:'',
+  data () {
+    return {
+      visitCount: '',
     }
   },
   mounted () {
-    getVisitCount().then(res=>{
+    getVisitCount().then(res => {
       const { visit } = res.data
       this.visitCount = visit
       console.log(res)
