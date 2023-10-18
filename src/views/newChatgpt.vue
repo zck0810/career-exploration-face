@@ -1,13 +1,18 @@
 <template>
   <div class="ChatGPT-container">
-    <div class="chatContent">
-      <ul>
-        <li v-for="(item, index) in responseText" :key="index" :class="[item.is_robot === 0 ? 'left' : 'right']">
-          <span>{{ item.content }}</span>
-        </li>
-      </ul>
+    <div class="welcome" v-show="dialogBox === '1'">
+      欢迎使用AI助手
     </div>
-    <el-input v-model="inputValue" placeholder="Please input" class="input-with-select" @keyup.native.enter="sendMsg">
+    <div class="chatContainer" v-show="dialogBox === '0'">
+      <div class="chatContent">
+        <ul>
+          <li v-for="(item, index) in responseText" :key="index" :class="[item.is_robot === 0 ? 'left' : 'right']">
+            <span>{{ item.content }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <el-input v-model="inputValue" placeholder="Please input" class="input-with-select" @keyup.enter.native="sendMsg">
       <template #append>
         <el-button @click="sendMsg" type="primary">发送
         </el-button>
@@ -23,6 +28,7 @@ export default {
   name: 'newChatgpt',
   data () {
     return {
+      dialogBox: '1',
       inputValue: '',
       responseText: [],
       answer: []
@@ -37,6 +43,7 @@ export default {
       }
     },
     async sendMsg () {
+      this.dialogBox = '0'
       if (this.inputValue.length < 1) {
         return Message({
           message: '不能发送空消息！',
@@ -105,11 +112,21 @@ export default {
 .chatContent {
   margin: 10px 10%;
   text-align: center;
-  height: 580px;
   background-color: rgba(123, 124, 124, 0.23);
   border-radius: 10px;
+  /*overflow-y: auto;*/
 }
-
+.chatContainer{
+  height: calc(100vh - 140px);
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+.welcome{
+  line-height: calc(100vh - 500px);
+  font-size: 40px;
+  height: calc(100vh - 140px);
+  max-height: calc(100vh - 140px);
+}
 ul {
   list-style: none;
   padding: 20px;
@@ -126,7 +143,7 @@ li.left {
 li.left span {
   display: inline-block;
   border-radius: 0 15px 15px;
-  background-color: rgba(66, 196, 240, 0.1);
+  background-color: rgba(66, 196, 240, 0.32);
   padding: 10px 15px;
 }
 
@@ -138,7 +155,7 @@ li.right {
 li.right span {
   display: inline-block;
   border-radius: 15px 0 15px 15px;
-  background-color: rgba(73, 154, 41, 0.1);
+  background-color: rgba(73, 154, 41, 0.25);
   padding: 10px 15px;
 }
 
