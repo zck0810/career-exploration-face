@@ -9,3 +9,12 @@ export function getCompanyData(data) {
  })
 }
 
+//查询公司数据
+export function getHighCompanyInformation(data1) {
+  return request({
+    url:'/company/getHighCompanyInformation',
+    method:'post',
+    data:data1
+  })
+}
+

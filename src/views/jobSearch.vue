@@ -13,28 +13,28 @@
                   height="590px"
                   style="overflow-y: auto;"
         >
-          <el-table-column type="index" label="序号" width="80">
+          <el-table-column type="index" label="序号" width="80" header-align="center" align="center">
             <template slot-scope="scope">
               <span>{{(pageNum - 1) * pageSize + scope.$index + 1}}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="position" label="职位" width="300">
+          <el-table-column prop="position" label="职位" width="300" header-align="center" align="center">
           </el-table-column>
-          <el-table-column prop="city" label="城市" width="100">
+          <el-table-column prop="city" label="城市" width="100" header-align="center" align="center">
           </el-table-column>
-          <el-table-column prop="salary" label="薪资" width="120">
+          <el-table-column prop="salary" label="薪资" width="120" header-align="center" align="center">
           </el-table-column>
-          <el-table-column prop="experience" label="经验" width="80">
+          <el-table-column prop="experience" label="经验" width="80" header-align="center" align="center">
           </el-table-column>
-          <el-table-column prop="education" label="学历" width="100">
+          <el-table-column prop="education" label="学历" width="100" header-align="center" align="center">
           </el-table-column>
-          <el-table-column prop="tags" label="标签" width="300">
+          <el-table-column prop="tags" label="标签" width="300" header-align="center" align="center">
           </el-table-column>
-          <el-table-column prop="companyName" label="公司名" width="220">
+          <el-table-column prop="companyName" label="公司名" width="220" header-align="center" align="center">
           </el-table-column>
-          <el-table-column prop="companyScale" label="公司规模" width="150">
+          <el-table-column prop="companyScale" label="公司规模" width="150" header-align="center" align="center">
           </el-table-column>
-          <el-table-column show-overflow-tooltip label="职位详情" width="150">
+          <el-table-column show-overflow-tooltip label="职位详情" width="150" header-align="center" align="center">
             <template slot-scope="scope">
               <span class="span-text" v-if="scope.row.href!== undefined && scope.row.href.length >=1">
                 <a link :href="scope.row.href" target="_blank">职位详情链接</a></span>
@@ -69,7 +69,7 @@
         tableData: [],
         pageNum: 1,
         pageSize: 10,
-        total: 0
+        total: 0,
       }
     },
     methods: {
