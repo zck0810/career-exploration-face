@@ -24,6 +24,15 @@ export function getPositionData(data) {
   })
 }
 
+//高级筛选
+export function getJobInformation(data) {
+  return request({
+    url:'/liepin/getJobInformation',
+    method:'post',
+    data:data
+  })
+}
+
 
 export function getEducationCount(){
   return request({
