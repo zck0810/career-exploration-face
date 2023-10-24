@@ -40,7 +40,6 @@ export default {
       await this.printMessage('正在思考，请等待......')
 
       const response = await this.getChatGPTResponse()
-      console.log(response)
       await this.printMessage(response)
       this.loading = false // 结束加载动画
 

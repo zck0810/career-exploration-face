@@ -1,10 +1,12 @@
 <template>
   <div class="jobSearch-container">
-    <div style="margin-bottom:10px;width: 100%;height: 80%">
-      <el-input v-model="name" placeholder="请输入职位信息" suffix-icon="el-icon-search" @keyup.enter.native="loadPost"
-                style="width:500px ;margin:20px;border:1px solid skyblue;border-radius: 2px"></el-input>
-      <el-button type="primary" @click="loadPost">查询</el-button>
-      <el-button type="success" @click="resultQuery">重置</el-button>
+    <div style="width: 100%;height: calc(100vh - 54px)">
+      <div style="height: 80px;width: 100%;">
+        <el-input v-model="name" placeholder="请输入职位信息" suffix-icon="el-icon-search" @keyup.enter.native="loadPost"
+                  style="width:500px ; margin:18px;border:1px solid skyblue;border-radius: 2px"></el-input>
+        <el-button type="primary" @click="loadPost">查询</el-button>
+        <el-button type="success" @click="resultQuery">重置</el-button>
+      </div>
       <div class="mid">
         <el-select v-model="select1.value" filterable placeholder="职位类型">
           <el-option
@@ -50,10 +52,11 @@
       </div>
       <div class="content">
         <el-table :data="tableData"
+                  :row-style="{height:'6.28vh'}"
                   :header-cell-style="{background:'#f2f5fc',color:'#555555'}"
                   border
-                  height="590px"
-                  style="overflow-y: auto;"
+                  highlight-current-row
+                  height="calc(100vh - 230px)"
         >
           <el-table-column type="index" label="序号" width="80" header-align="center" align="center">
             <template slot-scope="scope">
@@ -76,7 +79,7 @@
           </el-table-column>
           <el-table-column prop="companyScale" label="公司规模" width="150" header-align="center" align="center">
           </el-table-column>
-          <el-table-column show-overflow-tooltip label="职位详情" width="150" header-align="center" align="center">
+          <el-table-column show-overflow-tooltip label="职位详情" header-align="center" align="center">
             <template slot-scope="scope">
               <span class="span-text" v-if="scope.row.href!== undefined && scope.row.href.length >=1">
                 <a link :href="scope.row.href" target="_blank">职位详情链接</a></span>
@@ -216,9 +219,7 @@
           select4:this.select4.value,
           select5:this.select5.value,
         }
-        console.log(data)
         getJobInformation(data).then(res => {
-          console.log(res);
           if(res.code===20000){
             this.tableData = res.data
             this.total = res.total
@@ -240,9 +241,7 @@
           pageNum: this.pageNum,
           name: this.name,
         }
-        console.log(data)
         getPositionData(data).then(res => {
-          console.log(res)
           if (res.code === 20000) {
             this.tableData = res.data
             this.total = res.total
@@ -284,12 +283,16 @@
     max-height: calc(100vh - 54px);
     overflow-y: auto;
   }
-
+.mid{
+  height: 40px;
+}
   .content {
     width: 96%;
     text-align: center;
-    height: 100%;
+    height: calc(100vh - 194px);
+    max-height: calc(100vh - 198px);
     margin: 10px auto;
+    /*overflow-y: auto;*/
   }
 
   a {

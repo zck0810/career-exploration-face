@@ -59,7 +59,6 @@ export default {
         is_robot: 1
       })
       const resp =await this.getChatGPTResponse()
-      console.log("6666666666666",resp)
       this.answer.push({
         role: 'system',
         content: resp
@@ -96,7 +95,6 @@ export default {
       }
 
       const json = await response.json()
-      console.log("8888888888",response)
       return {
         content: json.choices[0].text,
         is_robot: 0

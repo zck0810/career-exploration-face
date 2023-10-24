@@ -146,7 +146,6 @@ export default {
       })
       this.config.data = positionCountData
       this.config = { ...this.config }
-      console.log(this.config)
     })
   },
 }

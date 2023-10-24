@@ -1,6 +1,7 @@
 <template>
   <div class="update-demo">
-    <dv-conical-column-chart :config="config" style="width:90%;height:30vh; padding-top: 20px; margin-left: 20px;" />
+    <span style="position: absolute; top: 20px; text-align: center; font-size: 20px; left: 35%; color:yellow; font-weight: bold">学历要求岗位数量关系</span>
+    <dv-conical-column-chart :config="config" style="width:96%;height:35vh; top: 10px; margin-left: 10px; position: relative; background-color: rgba(15,55,95,0.18)"  />
   </div>
 </template>
 
@@ -13,8 +14,16 @@ export default {
     return {
       config: {
         showValue: true,
-        fontSize:13,
-        imgSideLength:40,
+        fontSize:14,
+        imgSideLength:30,
+        columnColor: "rgba(0,216,255,0.58)",
+        title: {                      // 添加标题
+          text: '应届生各学历与起薪关系',      // 标题内容
+          textStyle: {
+            color: 'yellow'           // 标题文字颜色
+          },
+          left: 'center'              // 标题居中显示
+        },
         img: [
           'http://datav.jiaminghi.com/img/conicalColumnChart/1st.png',
           'http://datav.jiaminghi.com/img/conicalColumnChart/2st.png',
@@ -22,7 +31,6 @@ export default {
           'http://datav.jiaminghi.com/img/conicalColumnChart/4st.png',
           'http://datav.jiaminghi.com/img/conicalColumnChart/5st.png',
           'http://datav.jiaminghi.com/img/conicalColumnChart/6st.png',
-          'http://datav.jiaminghi.com/img/conicalColumnChart/7st.png'
         ],
         data: [
           {
@@ -68,3 +76,6 @@ export default {
   }
 }
 </script>
+
+
+

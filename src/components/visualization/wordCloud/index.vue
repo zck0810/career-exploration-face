@@ -1,5 +1,5 @@
 <template>
-  <div id="wordCloud" ref="wordCloud" style="height: 40vh; width: 94%;margin-left: 13px; padding-top: 12px;" ></div>
+  <div id="wordCloud" ref="wordCloud" style="height: 42vh; width: 97%;margin-left: 10px; padding-top: 12px;" ></div>
 </template>
 <script>
 import * as echarts from 'echarts'

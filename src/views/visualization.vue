@@ -40,7 +40,7 @@
         </el-row>
         <el-row style="height: 30%;">
           <dv-border-box-13>
-            <wordCloud></wordCloud>
+            <companyScale></companyScale>
           </dv-border-box-13>
         </el-row>
       </el-col>
@@ -55,6 +55,7 @@ import hotPosition from '@/components/visualization/hotPosition'
 import myMap from '@/components/visualization/myMap'
 import educationPositionCount from '@/components/visualization/educationPositionCount'
 import educationSalary from '@/components/visualization/educationSalary'
+import companyScale from '@/components/visualization/companyScale'
 
 export default {
   name: 'visualization',
@@ -64,7 +65,8 @@ export default {
     hotPosition,
     myMap,
     educationPositionCount,
-    educationSalary
+    educationSalary,
+    companyScale
   },
 
 }

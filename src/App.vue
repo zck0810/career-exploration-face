@@ -32,7 +32,6 @@ export default {
     getVisitCount().then(res => {
       const { visit } = res.data
       this.visitCount = visit
-      console.log(res)
     })
   }
 }

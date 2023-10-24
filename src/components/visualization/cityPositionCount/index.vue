@@ -19,7 +19,6 @@ export default {
     dataLink() {
       const myChart = echarts.init(document.getElementById('cityPositionCount'));
       getCityPositionCount().then(res => {
-        console.log(res)
         const cityList = [];
         const countList = [];
         for (let i = 0; i < res.data.length-10; i++) {

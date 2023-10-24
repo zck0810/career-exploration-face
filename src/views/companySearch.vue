@@ -1,19 +1,21 @@
 <template>
   <div class="companySearch-container">
-    <h1>公司查询页面</h1>
-    <div style="margin-bottom:10px;width: 100%;height: 80%">
-      <el-input v-model="name" placeholder="请输入企业名称或核心人员" suffix-icon="el-icon-search" @keyup.enter.native="loadPost"
-                style="width:500px ;margin-right:10px"></el-input>
-      <el-button type="primary" @click="loadPost">查询</el-button>
-      <el-button type="success" @click="resultQuery">重置</el-button>
-      <el-button type="warning" round @click="highSearch">高级公司搜索</el-button>
+    <div style="width: 100%;height: calc(100vh - 54px)">
+      <div style="height: 80px;width: 100%;">
+        <el-input v-model="name" placeholder="请输入企业名称或核心人员" suffix-icon="el-icon-search" @keyup.enter.native="loadPost"
+                  style="width:500px ;margin:18px; border:1px solid skyblue;border-radius: 2px"></el-input>
+        <el-button type="primary" @click="loadPost">查询</el-button>
+        <el-button type="success" @click="resultQuery">重置</el-button>
+        <el-button type="warning" round @click="highSearch">高级公司搜索</el-button>
+      </div>
 
       <div class="content">
         <el-table :data="tableData"
                   :header-cell-style="{background:'#f2f5fc',color:'#555555'}"
                   border
-                  height="590px"
-                  style="overflow-y: auto;"
+                  :row-style="{height:'6.28vh'}"
+                  highlight-current-row
+                  height="calc(100vh - 190px)"
         >
           <el-table-column type="index" label="序号" width="80" header-align="center" align="center">
             <template slot-scope="scope">
@@ -22,7 +24,7 @@
           </el-table-column>
           <el-table-column prop="companyName" label="公司名称" width="210" header-align="center" align="center">
           </el-table-column>
-          <el-table-column prop="manageState" label="状态" width="100" header-align="center" align="center">
+          <el-table-column prop="manageState" label="状态" header-align="center" align="center">
           </el-table-column>
           <el-table-column prop="legalRepresentative" label="代表人" width="100" header-align="center" align="center">
           </el-table-column>
@@ -207,9 +209,7 @@
           pageNum: this.pageNum,
           name: this.name,
         }
-        console.log(data)
         getCompanyData(data).then(res => {
-          console.log(res)
           if (res.code === 20000) {
             this.tableData = res.data
             this.total = res.total
@@ -236,7 +236,6 @@
         }
       },
       selectResult(){
-        console.log(this.form.condition)
         this.isHighSearch=true
         //防止填写错误也提交成功
         this.$refs.form.validate((valid) => {
@@ -255,7 +254,6 @@
           form: this.form
         }
         getHighCompanyInformation(data).then(res => {
-          console.log(res);
           if(res.code===20000){
             this.tableData = res.data
             this.total = res.total
@@ -301,7 +299,8 @@
   .content {
     width: 96%;
     text-align: center;
-    height: 100%;
+    height: calc(100vh - 154px);
+    max-height: calc(100vh - 158px);
     margin: 10px auto;
   }
 
