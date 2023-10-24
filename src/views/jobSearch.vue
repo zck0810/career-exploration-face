@@ -38,6 +38,14 @@
             :value="item.value">
           </el-option>
         </el-select>
+        <el-select v-model="select5.value" filterable placeholder="热门城市">
+          <el-option
+            v-for="item in select5.options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
         <el-button @click="filterAll" type="warning">筛选</el-button>
       </div>
       <div class="content">
@@ -153,7 +161,7 @@
             {label: '薪资面议', value: '薪资面议'},
             {label: '3-5K', value: '3-5K'},
             {label: '5-10K', value: '5-10K'},
-            {label: '10-20K', value: '5-10K'},
+            {label: '10-20K', value: '5-20K'},
             {label: '20-40K', value: '20-40K'},
             {label: '40-60K', value: '40-60K'},
             {label: '60K以上', value: '60K以上'},
@@ -172,11 +180,27 @@
 
           ]
         },
+        select5: {
+          value: '',
+          options: [
+            {label: '', value: ''},
+            {label: '北京', value: '北京'},
+            {label: '上海', value: '上海'},
+            {label: '深圳', value: '深圳'},
+            {label: '杭州', value: '杭州'},
+            {label: '成都', value: '成都'},
+            {label: '武汉', value: '武汉'},
+            {label: '广州', value: '广州'},
+            {label: '南京', value: '南京'},
+            {label: '西安', value: '西安'}
+
+          ]
+        },
       }
     },
     methods: {
       filterAll(){
-        if(this.select1.value===null&&this.select2.value===null&&this.select3.value===null&&this.select4.value===null){
+        if(this.select1.value===null&&this.select2.value===null&&this.select3.value===null&&this.select4.value===null&&this.select5.value===null){
           this.loadPost()
         }else{
           this.filterJob()
@@ -190,6 +214,7 @@
           select2:this.select2.value,
           select3:this.select3.value,
           select4:this.select4.value,
+          select5:this.select5.value,
         }
         console.log(data)
         getJobInformation(data).then(res => {

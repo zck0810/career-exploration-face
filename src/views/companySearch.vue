@@ -158,7 +158,7 @@
           </el-form>
           <span slot="footer" class="dialog-footer">
     <el-button @click="centerDialogVisible=false">取 消</el-button>
-    <el-button type="primary" @click="selectResult">查询结果</el-button>
+    <el-button type="primary" @click="findAll">查询结果</el-button>
   </span>
         </el-dialog>
       </div>
@@ -179,18 +179,25 @@
         pageSize: 10,
         total: 0,
         centerDialogVisible:false,
-        isHighSearch:true,
+        isHighSearch:false,
         form: {
           key: '',
           region: '',
-          year:'1-3年',
-          pay: '1-100万',
-          number:'0-49人',
+          year:'',
+          pay: '',
+          number:'',
           condition:[]
         },
       };
     },
     methods: {
+      findAll(){
+        if(this.form.key===''&&this.form.region===''&&this.form.year===''&&this.form.pay===''&&this.form.number===''&&this.form.condition===[]){
+          this.loadPost()
+        }else{
+          this.selectResult()
+        }
+      },
       resultQuery() {
         this.name = ''
       },
