@@ -1,10 +1,8 @@
 <template>
   <div class="content">
-    <div ref="charts" style="width: 100%; height: 87vh"></div>
+    <div id="charts" ref="charts" style="width: 98%; height: 86vh;margin-left: 7px;padding-top: 10px;"></div>
   </div>
 </template>
-
-
 <script>
 import * as echarts from 'echarts'
 import ChinaMap from '@/assets/china.json'
@@ -25,141 +23,125 @@ export default {
   mounted () {
     getProvincePositionCount().then(res=>{
       let provincePositionCount = res.data
-      provincePositionCount.forEach(item =>{
-        const {
-          positionCount,
-          province
-        } = item
-        this.provincePositionCountData.push({ 'name': province, 'value': positionCount})
-      })
-      console.log(this.provincePositionCountData)
+      provincePositionCount.forEach(item => {
+        const { positionCount, province } = item;
+        this.provincePositionCountData.push({'name': province, 'value': positionCount });
+      });
+      this.initCharts();
     })
   },
   methods: {
     initCharts() {
       const charts = echarts.init(this.$refs["charts"]);
       const option = {
-        // 背景颜色
-        backgroundColor: "rgba(64,74,89,0.07)",
-        // 提示浮窗样式
-        tooltip: {
-          formatter(params) {
-            return `地区：${params.name}</br>数值：${params.value[2]}`;
-          },
-          show: true,
-          trigger: "item",
-          alwaysShowContent: false,
-          backgroundColor: "#0C121C",
-          borderColor: "rgba(0, 0, 0, 0.16);",
-          hideDelay: 100,
-          triggerOn: "mousemove",
-          enterable: true,
+        backgroundColor: 'rgba(15,55,95,0.29)',
+        // echarts 图表选项配置
+        title: {
+          text: '各省市岗位分布',
+          left: 'center', // 设置标题居中
+          top: 10, // 设置距离顶部 10px
           textStyle: {
-            color: "#DADADA",
-            fontSize: "12",
-            width: 20,
-            height: 30,
-            overflow: "break",
-          },
-          showDelay: 100
+            color: 'rgb(0,255,234)',
+          }
         },
-        // 地图配置
-        geo: {
-          roam: true,
-          zoom: 1.2,
-          center: [104.114129, 32.550339],
-          map: "china",
-          label: {
-            // 通常状态下的样式
-            normal: {
-              show: true,
-              fontSize: 10,
-              textStyle: {
-                color: '#fff',
-              },
-            },
-            // 鼠标放上去的样式
-            emphasis: {
-              textStyle: {
-                color: "#fff",
-              },
-            },
+        tooltip: {
+          trigger: 'item',
+          formatter:function(params) {
+            const c = params.value || 0 // 如果c不存在则赋值为0
+            return params.name + '\n' + c;
           },
-          // 地图区域的样式设置
-          itemStyle: {
-            normal: {
-              borderColor: "rgba(147, 235, 248, 1)",
-              borderWidth: 1,
-              areaColor: {
-                type: "radial",
-                x: 0.5,
-                y: 0.5,
-                r: 0.8,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color: "rgba(147,235,248,0.25)", // 0% 处的颜色
-                  },
-                  {
-                    offset: 1,
-                    color: "rgba(147,235,248,0.55)", // 100% 处的颜色
-                  },
-                ],
-                globalCoord: false, // 缺省为 false
-              },
-              shadowColor: "rgba(128,217,248,0.16)",
-              shadowOffsetX: -2,
-              shadowOffsetY: 2,
-              shadowBlur: 10,
+        },
+        visualMap: {
+          min: 0,
+          max: 20000,
+          left: '20px', // 向右移动 30px
+          top: 'bottom',
+          text: ['高', '低'],
+          pieces: [
+            {
+              lt: 100,
+              label: '< 100',
+              color: '#E4F3FF'
             },
-            // 鼠标放上去高亮的样式
-            emphasis: {
-              areaColor: "#389BB7",
-              borderWidth: 0,
+            {
+              gte: 100,
+              lt: 500,
+              label: ' 100-500 ',
+              color: '#E4F3FF'
             },
+            {
+              gte: 500,
+              lt: 3000,
+              label: '500-300',
+              color: '#AEDBFF'
+            },
+            {
+              gte: 3000,
+              lt: 7000,
+              label: '3000-7000 ',
+              color: '#8CD7E6'
+            },
+            {
+              gte: 7000,
+              lt: 10000,
+              label: '7000-10000  ',
+              color: '#91d524'
+            },
+              {
+              gte: 10000,
+              label: ' >10000 ',
+              color: 'green'
+            },
+          ],
+          itemWidth: 20,
+          itemHeight: 20,
+          showLabel: true,
+          textStyle: {
+            color: 'white',
           },
         },
         series: [
           {
-            type: "scatter",
-            coordinateSystem: "geo",
-            symbol: "pin",
-            legendHoverLink: true,
-            symbolSize: [60, 60],
-            // 这里渲染标志里的内容以及样式
+            name: '岗位数量',
+            type: 'map',
+            mapType: 'china',
+            left: 'center',
+            top: 130,
+            zoom: 1.3,
+            roam: true,
             label: {
-              show: true,
-              formatter(value) {
-                return value.data.value[2];
-              },
-              color: "#fff",
-            },
-            // 标志的样式
-            itemStyle: {
               normal: {
-                color: "rgba(255,0,0,.7)",
-                shadowBlur: 2,
-                shadowColor: "D8BC37",
+                show: true,
+                formatter:function(params) {
+                  const c = params.value || 0 // 如果c不存在则赋值为0
+                  return `{a|${c}}\n{b|${params.name}}`; // 使用a和b标签分别设置颜色
+                },
+                rich: {
+                  a: {
+                    color: 'red' // 数值c显示为红色
+                  },
+                  b: {
+                    color: 'rgb(19,23,18)' // params.name显示为默认颜色
+                  }
+                },
+                fontSize: 11,
               },
+              emphasis: {
+                show: true,
+              }
             },
-            // 数据格式，其中name,value是必要的，value的前两个值是数据点的经纬度，其他的数据格式可以自定义
-            // 至于如何展示，完全是靠上面的formatter来自己定义的
             data: this.provincePositionCountData,
-            showEffectOn: "render",
-            rippleEffect: {
-              brushType: "stroke",
-            },
-            hoverAnimation: true,
-            zlevel: 1,
           },
-        ],
-
-
-
+        ]
       };
       echarts.registerMap("china",ChinaMap)
-
       charts.setOption(option);
+      const chart = document.querySelector('#charts')
+      //放置 获取DOM 节点时 去监听
+      const observer = new ResizeObserver(() => {
+        charts.resize();
+      });
+      observer.observe(chart);
     },
   },
 };

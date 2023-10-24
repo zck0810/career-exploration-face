@@ -1,5 +1,5 @@
 <template>
-  <div id="wordCloud" ref="wordCloud" style="height: 100%; width: 100%;" ></div>
+  <div id="wordCloud" ref="wordCloud" style="height: 40vh; width: 94%;margin-left: 13px; padding-top: 12px;" ></div>
 </template>
 <script>
 import * as echarts from 'echarts'
@@ -35,7 +35,7 @@ export default {
     initChart(){
       let myChart = echarts.init(this.$refs.wordCloud);
       let option = {
-        backgroundColor: 'rgba(0, 0, 0, 0.15)', // 设置背景透明度为 80%
+        backgroundColor: 'rgba(15,55,95,0.18)',
         title: {
           text: '技术栈要求词云图',
           left: 'center', // 设置标题居中

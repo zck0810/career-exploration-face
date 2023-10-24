@@ -58,7 +58,8 @@ export default {
         content: this.inputValue,
         is_robot: 1
       })
-      const resp = this.gpt()
+      const resp =await this.getChatGPTResponse()
+      console.log("6666666666666",resp)
       this.answer.push({
         role: 'system',
         content: resp
@@ -83,7 +84,7 @@ export default {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer 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' // 请替换为您的API-KEY
+          Authorization: 'Bearer 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' // 请替换为您的API-KEY
         },
         body: JSON.stringify(data)
       })
@@ -93,6 +94,7 @@ export default {
       }
 
       const json = await response.json()
+      console.log("8888888888",response)
       return {
         content: json.choices[0].text,
         is_robot: 0

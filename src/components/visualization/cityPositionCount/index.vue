@@ -1,5 +1,5 @@
 <template>
-  <div id="cityPositionCount" style="width: 100%; height: 100%;"></div>
+  <div id="cityPositionCount" style="width: 94%; height: 40vh; margin-left: 13px;padding-top: 20px;"></div>
 </template>
 <script>
 import {getCityPositionCount} from "@/api/liepin";
@@ -42,7 +42,7 @@ export default {
           tooltip: {
             trigger: 'item',
           },
-          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          backgroundColor: 'rgba(15,55,95,0.17)',
           title: {
             text: '城市岗位数量Top10统计图',
             top: '15',
@@ -157,3 +157,13 @@ export default {
 <style scoped>
 
 </style>
+
+
+
+
+
+
+
+
+
+

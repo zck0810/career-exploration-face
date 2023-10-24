@@ -23,3 +23,11 @@ export function getPositionData(data) {
     data:data
   })
 }
+
+
+export function getEducationCount(){
+  return request({
+    url:'/liepin/getEducationCount',
+    method:'get',
+  })
+}

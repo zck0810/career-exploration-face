@@ -61,7 +61,7 @@ export default {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer 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', // 请替换为您的API-KEY
+          Authorization: 'Bearer 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', // 请替换为您的API-KEY
         },
         body: JSON.stringify(data),
       })

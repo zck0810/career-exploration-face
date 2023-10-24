@@ -1,3 +1,4 @@
+<!--
 <template>
   <div id="position" style="width: 100%; height: 100%;">
   </div>
@@ -106,4 +107,57 @@ export default {
 
 <style>
 
+</style>
+-->
+
+
+
+
+
+
+
+<template>
+  <div>
+    <div class="hotPosition">
+      <dv-scroll-ranking-board :config="config" class="scroll-ranking" />
+    </div>
+  </div>
+</template>
+
+<script>
+import { getHotPosition } from '@/api/liepin'
+
+export default {
+  name: 'hotPosition',
+  data () {
+    return {
+      config: {
+        rowNum:10,
+        data: []
+      }
+    }
+  },
+  mounted () {
+    getHotPosition().then(res=>{
+      const positionCount = res.data
+      let positionCountData = []
+      positionCount.forEach(item => {
+        positionCountData.push({name:item.position,value:item.count})
+      })
+      this.config.data = positionCountData
+      this.config = { ...this.config }
+      console.log(this.config)
+    })
+  },
+}
+</script>
+
+
+<style scoped>
+.scroll-ranking{
+  width: 92%;
+  height: 82vh;
+  margin-left: 20px;
+  padding-top: 50px;
+}
 </style>
