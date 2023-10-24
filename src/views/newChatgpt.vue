@@ -1,9 +1,9 @@
 <template>
-  <div class="ChatGPT-container">
+  <div id="wenti-body-div" class="ChatGPT-container">
     <div class="welcome" v-show="dialogBox === '1'">
       欢迎使用AI助手
     </div>
-    <div class="chatContainer" v-show="dialogBox === '0'">
+    <div  class="chatContainer" v-show="dialogBox === '0'">
       <div class="chatContent">
         <ul>
           <li v-for="(item, index) in responseText" :key="index" :class="[item.is_robot === 0 ? 'left' : 'right']">
@@ -66,6 +66,8 @@ export default {
       this.responseText.push(resp)
       // 清除数据框
       this.inputValue = ''
+      var div = document.getElementById('wenti-body-div');
+      div.scrollTop = div.scrollHeight;
     },
     async getChatGPTResponse () {
       const url = 'https://api.openai.com/v1/completions'

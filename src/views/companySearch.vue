@@ -6,7 +6,7 @@
                 style="width:500px ;margin-right:10px"></el-input>
       <el-button type="primary" @click="loadPost">查询</el-button>
       <el-button type="success" @click="resultQuery">重置</el-button>
-      <el-button type="warning" round @click="highSearch">高级搜索</el-button>
+      <el-button type="warning" round @click="highSearch">高级公司搜索</el-button>
 
       <div class="content">
         <el-table :data="tableData"
@@ -51,8 +51,19 @@
           <el-table-column prop="latestAnnualReportAddress" label="最新地址" width="220" header-align="center"
                            align="center">
           </el-table-column>
-          <el-table-column prop="website" label="公司网址" width="200" header-align="center" align="center">
+          <el-table-column prop="website" label="公司网址" width="200" header-align="center"
+                           align="center">
           </el-table-column>
+<!--          <el-table-column show-overflow-tooltip label="公司网址" width="200" header-align="center" align="center">-->
+<!--            <template slot-scope="scope">-->
+<!--              <span class="span-text" v-if="scope.row.website!=='-'&& scope.row.website.length >=2">-->
+<!--                <a link :href="scope.row.websi te" target="_blank">公司详情链接</a>-->
+<!--              </span>-->
+<!--              <span v-else>-->
+<!--                暂无网址-->
+<!--              </span>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
         </el-table>
         <!--            分页-->
         <el-pagination
@@ -113,31 +124,40 @@
             </el-form-item>
             <el-form-item label="成立年限">
               <el-radio-group v-model="form.year">
-                <el-radio label="1年内"></el-radio>
                 <el-radio label="1-3年"></el-radio>
                 <el-radio label="3-5年"></el-radio>
-                <el-radio label="5年以上"></el-radio>
+                <el-radio label="5-10年"></el-radio>
+                <el-radio label="10年以上"></el-radio>
               </el-radio-group>
             </el-form-item>
             <el-form-item label="注册资本">
               <el-radio-group v-model="form.pay">
-                <el-radio label="100万以内"></el-radio>
+                <el-radio label="1-100万"></el-radio>
                 <el-radio label="100-500万"></el-radio>
                 <el-radio label="500-1000万"></el-radio>
+                <el-radio label="1000-5000万"></el-radio>
                 <el-radio label="5000万以上"></el-radio>
               </el-radio-group>
             </el-form-item>
             <el-form-item label="参保人数">
               <el-radio-group  v-model="form.number">
-                <el-radio label="小于50人"></el-radio>
+                <el-radio label="0-49人"></el-radio>
                 <el-radio label="50-99人"></el-radio>
                 <el-radio label="100-499人"></el-radio>
                 <el-radio label="500人以上"></el-radio>
               </el-radio-group >
             </el-form-item>
+            <el-form-item label="更多筛选">
+              <el-checkbox-group  v-model="form.condition">
+                <el-checkbox label="联系电话"></el-checkbox>
+                <el-checkbox label="联系邮箱"></el-checkbox>
+                <el-checkbox label="网址信息"></el-checkbox>
+                <el-checkbox label="失信信息"></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button @click="centerDialogVisible=false">取 消</el-button>
     <el-button type="primary" @click="selectResult">查询结果</el-button>
   </span>
         </el-dialog>
@@ -159,12 +179,14 @@
         pageSize: 10,
         total: 0,
         centerDialogVisible:false,
+        isHighSearch:true,
         form: {
           key: '',
           region: '',
-          year:'',
-          pay: '',
-          number:''
+          year:'1-3年',
+          pay: '1-100万',
+          number:'0-49人',
+          condition:[]
         },
       };
     },
@@ -192,13 +214,23 @@
       },
       handleSizeChange(val) {
         this.pageSize = val
-        this.loadPost()
+        if(!this.isHighSearch){
+          this.loadPost()
+        }else {
+          this.doSelect()
+        }
       },
       handleCurrentChange(val) {
         this.pageNum = val
-        this.loadPost()
+        if(!this.isHighSearch){
+          this.loadPost()
+        }else {
+          this.doSelect()
+        }
       },
       selectResult(){
+        console.log(this.form.condition)
+        this.isHighSearch=true
         //防止填写错误也提交成功
         this.$refs.form.validate((valid) => {
           if (valid) {
@@ -220,12 +252,7 @@
           if(res.code===20000){
             this.tableData = res.data
             this.total = res.total
-            this.$message({
-              message: '提交成功',
-              type: 'success'
-            });
             this.centerDialogVisible=false
-
           }
           else{
             this.$message({
@@ -278,6 +305,7 @@
 </style>
 
 <style>
+   /*30个省滚动*/
   .el-scrollbar__wrap {
     overflow: scroll;
     height: auto;
