@@ -29,6 +29,11 @@ const routes = [
     path: '/newChatgpt',
     name: 'newChatgpt',
     component: () => import('../views/newChatgpt.vue')
+  },
+  {
+    path: '/Recommend',
+    name: '/Recommend',
+    component: () => import('../views/Recommend.vue')
   }
 ]
 

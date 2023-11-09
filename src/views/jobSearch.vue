@@ -102,8 +102,6 @@
 </template>
 
 <script>
-
-
   import {getPositionData,getJobInformation} from "@/api/liepin";
 
   export default {

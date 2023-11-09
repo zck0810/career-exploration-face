@@ -10,6 +10,8 @@
         |
 <!--        <router-link to="/ChatGPT">AI问答助手</router-link>-->
         <router-link to="/newChatgpt">AI问答助手</router-link>
+        |
+        <router-link to="/Recommend">职位推荐</router-link>
         <span
           style="float: right; margin-right: 30px; color: black; font-size: 20px">当前系统访问量为：{{ visitCount }}</span>
       </div>
