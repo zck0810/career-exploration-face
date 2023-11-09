@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="educationSalary" style="width: 97%; height: 36vh;margin-left: 10px;padding-top: 10px;"> </div>
+    <div id="educationSalary" style="width: 100%; height: 31vh;margin-left: 5px;padding-top: 10px;"> </div>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   data(){
     return{
       time:[],
-      educationData:['大专','本科不分区','本科普通院校','本科重点院校','硕士不分区','硕士普通院校','硕士重点院校','博士不分区','博士普通院校','博士重点院校'],
+      educationData:['大专','本科不分区','本科普通院校','本科重点院校','硕士普通院校','硕士重点院校','博士普通院校','博士重点院校'],
       countData1:[],
       countData2:[],
       countData3:[],
@@ -24,9 +24,7 @@ export default {
       const  tempData = res.data
       tempData.forEach(item=>{
         const {
-          doctorUnzoned,
           collegeDegree,
-          masterUnzoned,
           undergraduateUnzoned,
           generalMaster,
           generalDoctor,
@@ -42,10 +40,8 @@ export default {
           this.countData1.push(undergraduateUnzoned)
           this.countData1.push(generalUndergraduate)
           this.countData1.push(keyUndergraduate)
-          this.countData1.push(masterUnzoned)
           this.countData1.push(generalMaster)
           this.countData1.push(keyMaster)
-          this.countData1.push(doctorUnzoned)
           this.countData1.push(generalDoctor)
           this.countData1.push(keyDoctor)
         }
@@ -54,10 +50,8 @@ export default {
           this.countData2.push(undergraduateUnzoned)
           this.countData2.push(generalUndergraduate)
           this.countData2.push(keyUndergraduate)
-          this.countData2.push(masterUnzoned)
           this.countData2.push(generalMaster)
           this.countData2.push(keyMaster)
-          this.countData2.push(doctorUnzoned)
           this.countData2.push(generalDoctor)
           this.countData2.push(keyDoctor)
         }
@@ -66,10 +60,8 @@ export default {
           this.countData3.push(undergraduateUnzoned)
           this.countData3.push(generalUndergraduate)
           this.countData3.push(keyUndergraduate)
-          this.countData3.push(masterUnzoned)
           this.countData3.push(generalMaster)
           this.countData3.push(keyMaster)
-          this.countData3.push(doctorUnzoned)
           this.countData3.push(generalDoctor)
           this.countData3.push(keyDoctor)
         }
@@ -112,12 +104,12 @@ export default {
           data: this.educationData,
           axisLine: {
             lineStyle: {
-              color: '#00d8ff'
+              color: '#00d8ff',
             }
           },
           axisLabel: {
-            fontSize: 13, // 设置 x 轴字体大小为 14
-            rotate: 45 // 将文字旋转90度，使其竖着展示
+            fontSize: 12, // 设置 x 轴字体大小为 14
+            rotate: 30 // 将文字旋转90度，使其竖着展示
           }
         },
         yAxis: {

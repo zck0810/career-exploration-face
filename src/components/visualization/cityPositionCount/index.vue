@@ -1,5 +1,5 @@
 <template>
-  <div id="cityPositionCount" style="width: 94%; height: 40vh; margin-left: 13px;padding-top: 20px;"></div>
+  <div id="cityPositionCount" style="width: 100%; height: 33vh; margin-left: 13px;"></div>
 </template>
 <script>
 import {getCityPositionCount} from "@/api/liepin";
@@ -68,7 +68,7 @@ export default {
           },
           yAxis: {
             axisLine: {
-              show: false,
+              show: true,
             },
             axisTick: {
               show: false
@@ -84,7 +84,7 @@ export default {
           ],
           series: [
             {
-              type: 'bar',
+              type: 'line',
               left: '60', // 调整整体向右移动20px
               // showBackground: true,
               itemStyle: {
@@ -166,3 +166,69 @@ export default {
 
 
 
+
+<!--<template>
+  <div id="main" style="width: 100%; height: 33vh; margin-left: 13px;"></div>
+</template>
+<script>
+import * as echarts from 'echarts';
+export default {
+  name: "cityPositionCount",
+  mounted() {
+    this.dataLink()
+  },
+  methods: {
+    dataLink() {
+      const chartDom = document.getElementById('main')
+      const myChart = echarts.init(chartDom)
+      let option
+
+      option = {
+        series: [
+          {
+            type: 'treemap',
+            data: [
+              {
+                name: 'nodeA',
+                value: 10,
+                children: [
+                  {
+                    name: 'nodeAa',
+                    value: 4
+                  },
+                  {
+                    name: 'nodeAb',
+                    value: 6
+                  }
+                ]
+              },
+              {
+                name: 'nodeB',
+                value: 20,
+                children: [
+                  {
+                    name: 'nodeBa',
+                    value: 20,
+                    children: [
+                      {
+                        name: 'nodeBa1',
+                        value: 20
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      };
+
+      option && myChart.setOption(option);
+
+    }
+  }
+}
+</script>
+<style scoped>
+
+</style>-->

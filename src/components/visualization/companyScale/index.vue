@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="companyScale" style="height: 35vh; width: 96%;margin-left: 10px; padding-top: 12px;"></div>
+    <div id="companyScale" style="height: 26vh; width: 96%;margin-left: 10px; padding-top: 12px;"></div>
   </div>
 </template>
 
@@ -65,7 +65,7 @@ export default {
             name: '公司规模占比',
             type: 'pie',
             top: 60,
-            radius: ['35%', '70%'],
+            radius: ['50%', '95%'],
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 10,

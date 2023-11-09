@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div id="charts" ref="charts" style="width: 98%; height: 86vh;margin-left: 7px;padding-top: 10px;"></div>
+    <div id="charts" ref="charts" style="width: 98%; height: 90vh;margin-left: 7px;padding-top: 10px;"></div>
   </div>
 </template>
 <script>
@@ -107,14 +107,21 @@ export default {
             mapType: 'china',
             left: 'center',
             top: 130,
-            zoom: 1.3,
+            zoom: 1.2,
             roam: true,
             label: {
               normal: {
-                show: true,
-                formatter:function(params) {
-                  const c = params.value || 0 // 如果c不存在则赋值为0
-                  return `{a|${c}}\n{b|${params.name}}`; // 使用a和b标签分别设置颜色
+                show: function(params) {
+                  const c = params.value || 0; // 如果c不存在则赋值为0
+                  return c >= 10; // 只有当c大于等于10时才显示
+                },
+                formatter: function(params) {
+                  const c = params.value || 0; // 如果c不存在则赋值为0
+                  if (c >= 10) {
+                    return `{a|${c}}\n{b|${params.name}}`; // 使用a和b标签分别设置颜色
+                  } else {
+                    return `{b|${params.name}}`; // 当c小于10时只显示name，不显示值
+                  }
                 },
                 rich: {
                   a: {
@@ -146,4 +153,6 @@ export default {
   },
 };
 </script>
+
+
 
