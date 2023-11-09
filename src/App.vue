@@ -7,8 +7,8 @@
         <router-link to="/jobSearch">职位查询</router-link>
         |
         <router-link to="/companySearch">公司查询</router-link>
+<!--        <router-link to="/ChatGPT">AI问答助手老版</router-link>-->
         |
-<!--        <router-link to="/ChatGPT">AI问答助手</router-link>-->
         <router-link to="/newChatgpt">AI问答助手</router-link>
         |
         <router-link to="/Recommend">职位推荐</router-link>

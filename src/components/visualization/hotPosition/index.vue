@@ -119,6 +119,12 @@ export default {
 <template>
   <div>
     <div class="hotPosition">
+      <label class="labelClass">岗位数量排名Top100：</label>
+      <select class="citySelect" v-model="selectedCity" @change="getCityData">
+        <option>全国</option>
+        <option>北京</option>
+        <option>上海</option>
+      </select>
       <dv-scroll-ranking-board :config="config" class="scroll-ranking" />
     </div>
   </div>
@@ -131,6 +137,7 @@ export default {
   name: 'hotPosition',
   data () {
     return {
+      selectedCity: '全国', // 默认选择全国
       config: {
         rowNum:10,
         data: []
@@ -138,16 +145,22 @@ export default {
     }
   },
   mounted () {
-    getHotPosition().then(res=>{
-      const positionCount = res.data
-      let positionCountData = []
-      positionCount.forEach(item => {
-        positionCountData.push({name:item.position,value:item.count})
-      })
-      this.config.data = positionCountData
-      this.config = { ...this.config }
-    })
+    this.getCityData()
   },
+  methods:{
+    getCityData() {
+      const selectedCity = this.selectedCity
+      getHotPosition(selectedCity).then(res=>{
+        const positionCount = res.data
+        let positionCountData = []
+        positionCount.forEach(item => {
+          positionCountData.push({name:item.position,value:item.count})
+        })
+        this.config.data = positionCountData
+        this.config = { ...this.config }
+      })
+    }
+  }
 }
 </script>
 
@@ -155,8 +168,34 @@ export default {
 <style scoped>
 .scroll-ranking{
   width: 92%;
-  height: 82vh;
+  height: 56vh;
   margin-left: 20px;
   padding-top: 50px;
+}
+.hotPosition{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.labelClass{
+  position: absolute;
+  top: 15px;
+  left: 5%;
+  font-size: 18px;
+  color: yellow;
+  font-weight: bold;
+
+}
+.citySelect{
+  position: absolute;
+  top: 12px;
+  width: 100px;
+  height: 30px;
+  left: 50%;
+  background-color: rgb(19, 23, 18);
+  border-radius: 5px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.78);
 }
 </style>

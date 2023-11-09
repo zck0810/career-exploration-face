@@ -8,10 +8,11 @@ export function getCityPositionCount(){
 }
 
 
-export function getHotPosition(){
+export function getHotPosition(selectedCity){
   return request({
     url:'/liepin/getHotPosition',
     method:'get',
+    params:{selectedCity: selectedCity}
   })
 }
 

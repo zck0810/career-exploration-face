@@ -1,5 +1,5 @@
 <template>
-  <div id="wordCloud" ref="wordCloud" style="height: 42vh; width: 97%;margin-left: 10px; padding-top: 12px;" ></div>
+  <div id="wordCloud" ref="wordCloud" style="height: 31vh; width: 97%;margin-left: 10px; padding-top: 5px;" ></div>
 </template>
 <script>
 import * as echarts from 'echarts'
@@ -66,7 +66,7 @@ export default {
             type: "wordCloud",
             shape: 'circle',
             //用来调整词之间的距离
-            gridSize: 8,
+            gridSize: 7,
             sizeRange: [12, 30],
             rotationRange: [0,90],
             left: "center",

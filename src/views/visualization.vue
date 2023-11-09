@@ -1,42 +1,37 @@
 <template xmlns="">
   <div class="visualization-container">
     <el-row class="row-class">
-      <el-col :span="7" class="col-container">
+      <el-col :span="8" class="col-container">
         <el-row style="height: 35%;">
           <dv-border-box-13>
             <wordCloud></wordCloud>
           </dv-border-box-13>
         </el-row>
         <el-row style="height: 35%;">
-          <dv-border-box-13>
-            <cityPositionCount></cityPositionCount>
+          <dv-border-box-13 style="overflow: hidden">
+            <educationSalary></educationSalary>
           </dv-border-box-13>
         </el-row>
         <el-row style="height: 30%;">
-          <dv-border-box-13>
-            <educationPositionCount></educationPositionCount>
+          <dv-border-box-13 style="overflow: hidden">
+            <cityPositionCount></cityPositionCount>
           </dv-border-box-13>
         </el-row>
       </el-col>
 
-      <el-col :span="10" class="col-container">
-        <el-row style="height: 70%;">
+      <el-col :span="9" class="col-container">
+        <el-row style="height: 100%;">
           <dv-border-box-1>
             <myMap></myMap>
           </dv-border-box-1>
-        </el-row>
-        <el-row style="height: 30%;">
-          <dv-border-box-13>
-            <educationSalary></educationSalary>
-          </dv-border-box-13>
         </el-row>
       </el-col>
 
       <el-col :span="7" class="col-container">
         <el-row style="height: 70%;">
-          <dv-border-box-11 title="岗位数量前100排名">
+          <dv-border-box-13>
             <hotPosition></hotPosition>
-          </dv-border-box-11>
+          </dv-border-box-13>
         </el-row>
         <el-row style="height: 30%;">
           <dv-border-box-13>
@@ -68,7 +63,6 @@ export default {
     educationSalary,
     companyScale
   },
-
 }
 </script>
 
@@ -82,11 +76,11 @@ export default {
   background-size: cover;
 }
 .row-class{
-  height: 126vh;
-  max-height: 126vh;
+  height: calc(100vh - 54px);
+  max-height: calc(100vh - 54px);
 }
 .col-container{
-  height: 126vh;
-  max-height: 126vh;
+  height: calc(100vh - 54px);
+  max-height: calc(100vh - 54px);
 }
 </style>
