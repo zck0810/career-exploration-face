@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div id="educationSalary" style="width: 100%; height: 31vh;margin-left: 5px;padding-top: 10px;"> </div>
+    <div id="educationSalary" style="width: 100%; height: 33vh;margin-left: 5px;padding-top: 10px; position:relative;"> </div>
+    <button @click="changeEcharts" style="position: absolute; height: 25px;width: 60px;top: 20px;right: 20px; font-size: 14px; color: rgb(255,251,0); background-color: rgba(0,216,255,0.87)" >{{changeShowText}}</button>
   </div>
 </template>
 
@@ -9,7 +10,7 @@ import * as echarts from 'echarts'
 import { getFreshGraduateSalary } from '@/api/freshGraduateSalary'
 
 export default {
-  name: 'index',
+  name: 'educationSalary',
   data(){
     return{
       time:[],
@@ -17,63 +18,82 @@ export default {
       countData1:[],
       countData2:[],
       countData3:[],
+      chartDom:null,
+      changeShowText:'按城市',
+      timer: null,  // 添加一个定时器变量
     }
   },
-  mounted () {
-    getFreshGraduateSalary().then(res=>{
-      const  tempData = res.data
-      tempData.forEach(item=>{
-        const {
-          collegeDegree,
-          undergraduateUnzoned,
-          generalMaster,
-          generalDoctor,
-          keyDoctor,
-          generalUndergraduate,
-          keyUndergraduate,
-          time,
-          keyMaster
-        } = item
-        this.time.push(time)
-        if(time === '2021届'){
-          this.countData1.push(collegeDegree)
-          this.countData1.push(undergraduateUnzoned)
-          this.countData1.push(generalUndergraduate)
-          this.countData1.push(keyUndergraduate)
-          this.countData1.push(generalMaster)
-          this.countData1.push(keyMaster)
-          this.countData1.push(generalDoctor)
-          this.countData1.push(keyDoctor)
-        }
-        if(time === '2022届'){
-          this.countData2.push(collegeDegree)
-          this.countData2.push(undergraduateUnzoned)
-          this.countData2.push(generalUndergraduate)
-          this.countData2.push(keyUndergraduate)
-          this.countData2.push(generalMaster)
-          this.countData2.push(keyMaster)
-          this.countData2.push(generalDoctor)
-          this.countData2.push(keyDoctor)
-        }
-        if(time === '2023届'){
-          this.countData3.push(collegeDegree)
-          this.countData3.push(undergraduateUnzoned)
-          this.countData3.push(generalUndergraduate)
-          this.countData3.push(keyUndergraduate)
-          this.countData3.push(generalMaster)
-          this.countData3.push(keyMaster)
-          this.countData3.push(generalDoctor)
-          this.countData3.push(keyDoctor)
-        }
-      })
-      this.initData()
-    })
+  async mounted () {
+   await getFreshGraduateSalary().then(res=>{
+        const  tempData = res.data
+        tempData.forEach(item=>{
+          const {
+            collegeDegree,
+            undergraduateUnzoned,
+            generalMaster,
+            generalDoctor,
+            keyDoctor,
+            generalUndergraduate,
+            keyUndergraduate,
+            time,
+            keyMaster
+          } = item
+          this.time.push(time)
+          if(time === '2021届'){
+            this.countData1.push(collegeDegree)
+            this.countData1.push(undergraduateUnzoned)
+            this.countData1.push(generalUndergraduate)
+            this.countData1.push(keyUndergraduate)
+            this.countData1.push(generalMaster)
+            this.countData1.push(keyMaster)
+            this.countData1.push(generalDoctor)
+            this.countData1.push(keyDoctor)
+          }
+          if(time === '2022届'){
+            this.countData2.push(collegeDegree)
+            this.countData2.push(undergraduateUnzoned)
+            this.countData2.push(generalUndergraduate)
+            this.countData2.push(keyUndergraduate)
+            this.countData2.push(generalMaster)
+            this.countData2.push(keyMaster)
+            this.countData2.push(generalDoctor)
+            this.countData2.push(keyDoctor)
+          }
+          if(time === '2023届'){
+            this.countData3.push(collegeDegree)
+            this.countData3.push(undergraduateUnzoned)
+            this.countData3.push(generalUndergraduate)
+            this.countData3.push(keyUndergraduate)
+            this.countData3.push(generalMaster)
+            this.countData3.push(keyMaster)
+            this.countData3.push(generalDoctor)
+            this.countData3.push(keyDoctor)
+          }
+        })})
 
+    this.initEducationSalaryEcharts()
+
+    this.timer = setInterval(this.changeEcharts, 8000);
   },
   methods:{
-    initData(){
-      const chartDom = document.getElementById('educationSalary')
-      const myChart = echarts.init(chartDom)
+    changeEcharts(){
+      this.initEcharts()
+    },
+    initEcharts(){
+        if(this.changeShowText === '按城市'){
+          this.changeShowText = '按时间'
+          echarts.dispose(this.chartDom);
+          this.initEducationSalaryDataWithCity()
+        }else {
+          this.changeShowText = '按城市'
+          echarts.dispose(this.chartDom);
+          this.initEducationSalaryEcharts()
+        }
+    },
+
+    initEducationSalaryEcharts(){
+      this.chartDom = document.getElementById('educationSalary')
+      const myChart = echarts.init(this.chartDom)
       let option
 
       option = {
@@ -171,12 +191,86 @@ export default {
         myChart.resize();
       });
       observer.observe(educationSalary);
+    },
 
+    initEducationSalaryDataWithCity(){
+      this.chartDom = document.getElementById('educationSalary')
+      const myChart = echarts.init(this.chartDom)
+      let option
+      option = {
+        title: {                      // 添加标题
+          text: '应届生各学历起薪与城市关系',      // 标题内容
+          textStyle: {
+            color: 'yellow'           // 标题文字颜色
+          },
+          left: 'center'              // 标题居中显示
+        },
+        legend: {
+          top:30,
+          textStyle: {
+            color: 'yellow',
+            fontSize: 15, // 设置 x 轴字体大小为 14
+          }
+        },
+        tooltip: {},
+        dataset: {
+          source: [
+            ['product', '大专', '本科', '硕士'],
+            ['上海', 6200, 7500, 10500],
+            ['北京', 6200, 7600, 10400],
+            ['南京', 5300, 6700, 9200],
+            ['广州', 5400, 6800, 8900],
+            ['成都', 5500, 6900, 9200],
+            ['杭州', 5600, 7200, 9100],
+            ['武汉', 5000, 6500, 8600],
+            ['深圳', 6000, 7300, 10200],
+            ['西安', 5100, 6500, 8700],
+            ['郑州', 4800, 6000, 8100],
+          ]
+        },
+        xAxis: {
+          name:'城市',
+          type: 'category',
+          axisLine: {
+            lineStyle: {
+              color: '#00d8ff',
+            }
+          },
+          axisLabel: {
+            fontSize: 12, // 设置 x 轴字体大小为 14
+          }},
+        yAxis: {
+          name:'薪资',
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#00d8ff'
+            }
+          },
+        },
+        series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
+      };
+
+      option && myChart.setOption(option);
+      const EducationSalaryDataWithCity = document.querySelector('#educationSalary')
+      //放置 获取DOM 节点时 去监听
+      const observer = new ResizeObserver(() => {
+        myChart.resize();
+      });
+      observer.observe(EducationSalaryDataWithCity);
     }
-  }
+  },
+
+  beforeDestroy() {
+    if (this.chartDom) {
+      echarts.dispose(this.chartDom);
+    }
+    // 清除定时器
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  },
 }
 </script>
 
-<style scoped>
 
-</style>
