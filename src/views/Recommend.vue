@@ -33,13 +33,12 @@
       },
       loadPost() {
         const data = {
-          from: this.from,
+          form: this.form,
         }
         getRecommendData(data).then(res => {
           console.log(res)
           if (res.code === 20000) {
-            this.result=res.data.data
-            console.log(this.result)
+            this.result= res.data.data
           } else {
             alert('获取数据失败')
           }

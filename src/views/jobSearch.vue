@@ -113,7 +113,7 @@
         pageNum: 1,
         pageSize: 10,
         total: 0,
-        isHighSearch: true,
+        isHighSearch: false,
         select1: {
           value: '',
           options: [
@@ -259,6 +259,7 @@
       },
       handleCurrentChange(val) {
         this.pageNum = val
+        //！false=true 在if中为真，就成立了
         if (!this.isHighSearch) {
           this.loadPost()
         }else {

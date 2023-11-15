@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 
-export function getRecommendData(data){
+export function getRecommendData(inputValue){
   return request({
     url:'/runPython',
     method:'post',
-    data:data
+    params:{inputValue: inputValue}
   })
 }
