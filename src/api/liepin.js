@@ -1,9 +1,10 @@
 import request from '@/utils/request'
 
-export function getCityPositionCount(){
+export function getCityPositionCount(selectedCity){
   return request({
     url:'/liepin/getCityPositionCount',
     method:'get',
+    params:{selectedCity: selectedCity}
   })
 }
 
