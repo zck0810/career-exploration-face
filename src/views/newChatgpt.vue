@@ -64,7 +64,7 @@
   export default {
     data() {
       return {
-        modelType: 'ChatGPT',
+        modelType: '职位推荐',
         responseText: [],
         answer: [],
         inputValue: '', // 用于存储输入框的值
