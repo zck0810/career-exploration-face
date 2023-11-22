@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
-export function getCompanyScaleData(){
+export function getCompanyScaleData(selectedCity){
   return request({
-    url:'/company-scale/getCompanyScaleData',
+    url:'/company/getCompanyScaleData',
     method:'get',
+    params:{selectedCity: selectedCity}
   })
 }

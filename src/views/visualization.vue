@@ -47,7 +47,8 @@
         </el-row>
         <el-row style="height: 30%;">
           <dv-border-box-13>
-            <companyScale></companyScale>
+<!--            <companyScale></companyScale>-->
+            <div id="companyScale" style="height: 26vh; width: 96%;margin-left: 10px; padding-top: 12px;"></div>
           </dv-border-box-13>
         </el-row>
       </el-col>
@@ -63,6 +64,7 @@ import educationSalary from '@/components/visualization/educationSalary'
 import companyScale from '@/components/visualization/companyScale'
 import { getCityPositionCount, getHotPosition } from '@/api/liepin'
 import * as echarts from 'echarts'
+import { getCompanyScaleData } from '@/api/companyScale'
 export default {
   name: 'visualization',
   data(){
@@ -77,6 +79,7 @@ export default {
       countList: [],
       currentIndex: 1,
       myChart: null,
+      companyScale:[],
     }
   },
   components: {
@@ -92,6 +95,8 @@ export default {
     await this.getLineChartData()
 
     this.cityPositionCountEcharts()
+
+    this.companyScaleEcharts()
     // 定时更新数据
     setInterval(this.updateChart, 2000)
   },
@@ -100,7 +105,8 @@ export default {
       this.hotPositionEcharts() //渲染热门岗位轮播图
       this.getLineChartData() //后去折线图城市岗位数量数据
       this.cityPositionCountEcharts() //渲染城市岗位数量折线图
-
+      this.companyScale = []
+      this.companyScaleEcharts() //渲染公司规模饼图
     },
     getLineChartData(){
       this.lineTitle = this.selectedCity + "热门城市岗位数量"
@@ -248,6 +254,93 @@ export default {
       })
       this.currentIndex = (this.currentIndex + 1) % (this.cityList.length - 7)
     },
+
+    companyScaleEcharts(){
+      getCompanyScaleData(this.selectedCity).then(res=>{
+        const tempCompanyScale = res.data[0]
+        console.log(tempCompanyScale)
+        const {
+          hundred_to_five_hundred,
+          less_than_fifty,
+          thousand_to_five_thousand,
+          fifty_to_hundred,
+          greater_than_five_thousand,
+          five_hundred_to_thousand
+        } = tempCompanyScale
+        this.companyScale.push({name:'50人以下',value: less_than_fifty})
+        this.companyScale.push({name:'500-100人',value: fifty_to_hundred})
+        this.companyScale.push({name:'100-500人',value: hundred_to_five_hundred})
+        this.companyScale.push({name:'500-1000人',value: five_hundred_to_thousand})
+        this.companyScale.push({name:'1000-5000人',value: thousand_to_five_thousand})
+        this.companyScale.push({name:'5000人以上',value: greater_than_five_thousand})
+        this.initPieData()
+      })
+    },
+
+    initPieData(){
+      const chartDom = document.getElementById('companyScale')
+      const myChart = echarts.init(chartDom)
+      let option
+
+      option = {
+        backgroundColor: 'rgba(15,55,95,0.18)',
+        title: {                      // 添加标题
+          text: this.selectedCity+'公司规模占比',      // 标题内容
+          textStyle: {
+            color: 'yellow'           // 标题文字颜色
+          },
+          left: 'center'              // 标题居中显示
+        },
+        legend: {
+          top: '10%',
+          left: 'center',
+          textStyle: {
+            color: 'white' // 将字体颜色设置为白色
+          }
+        },
+        series: [
+          {
+            name: '公司规模占比',
+            type: 'pie',
+            top: 60,
+            radius: ['50%', '95%'],
+            avoidLabelOverlap: false,
+            animationType: 'scale', // 设置过渡效果类型，这里使用缩放
+            animationDurationUpdate: 2000, // 过渡效果持续时间，单位为毫秒
+            itemStyle: {
+              borderRadius: 10,
+              borderColor: '#fff',
+              borderWidth: 2
+            },
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 40,
+                fontWeight: 'bold',
+                formatter: '{b}\n {d}%',
+                color: '#92e804'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: this.companyScale
+          }
+        ]
+      };
+
+      option && myChart.setOption(option);
+      const companyScale = document.querySelector('#companyScale')
+      //放置 获取DOM 节点时 去监听
+      const observer = new ResizeObserver(() => {
+        myChart.resize();
+      });
+      observer.observe(companyScale);
+    }
   }
 }
 </script>

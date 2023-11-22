@@ -1,3 +1,4 @@
+<!--
 <template>
   <div>
     <div id="companyScale" style="height: 26vh; width: 96%;margin-left: 10px; padding-top: 12px;"></div>
@@ -17,29 +18,28 @@ export default {
   },
 
   mounted () {
-    getCompanyScaleData().then(res=>{
-      const tempCompanyScale = res.data
-      tempCompanyScale.forEach(item=>{
-        const {
-          hundredToFiveHundred,
-          fiveHundredToThousand,
-          fiftyToHundred,
-          lessThanFifty,
-          greaterThanFiveThousand,
-          thousandToFiveThousand
-        } = item
-        this.companyScale.push({name:'50人以下',value: lessThanFifty})
-        this.companyScale.push({name:'500-100人',value: fiftyToHundred})
-        this.companyScale.push({name:'100-500人',value: hundredToFiveHundred})
-        this.companyScale.push({name:'500-1000人',value: fiveHundredToThousand})
-        this.companyScale.push({name:'1000-5000人',value: thousandToFiveThousand})
-        this.companyScale.push({name:'5000人以上',value: greaterThanFiveThousand})
-      })
-      this.initData()
+
+    getCompanyScaleData(selectedCity).then(res=>{
+      const tempCompanyScale = res.data[0]
+      const {
+        hundred_to_five_hundred,
+        less_than_fifty,
+        thousand_to_five_thousand,
+        fifty_to_hundred,
+        greater_than_five_thousand,
+        five_hundred_to_thousand
+      } = tempCompanyScale
+      this.companyScale.push({name:'50人以下',value: less_than_fifty})
+      this.companyScale.push({name:'500-100人',value: fifty_to_hundred})
+      this.companyScale.push({name:'100-500人',value: hundred_to_five_hundred})
+      this.companyScale.push({name:'500-1000人',value: five_hundred_to_thousand})
+      this.companyScale.push({name:'1000-5000人',value: thousand_to_five_thousand})
+      this.companyScale.push({name:'5000人以上',value: greater_than_five_thousand})
+      this.initPieData()
     })
   },
   methods:{
-    initData(){
+    initPieData(){
       const chartDom = document.getElementById('companyScale')
       const myChart = echarts.init(chartDom)
       let option
@@ -108,3 +108,4 @@ export default {
 <style scoped>
 
 </style>
+-->
