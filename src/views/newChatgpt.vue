@@ -18,9 +18,9 @@
           </div>
           <div class="more-functions">
             <div class="model-select">
-              <el-button @click="selectChatGPTModel">ChatGPT</el-button>
-              <el-button @click="selectPositionRecommendationModel">职位推荐</el-button>
-              <el-button @click="selectQuestionAnsweringAssistantModel">问答助手(默认)</el-button>
+              <el-button @click="selectChatGPTModel" :class="buttonColorChange === 'ChatGPT' ? 'becomeSkyblue' : 'becomeWhite'">ChatGPT</el-button>
+              <el-button @click="selectPositionRecommendationModel" :class="buttonColorChange === '职位推荐' ? 'becomeSkyblue' : 'becomeWhite'">职位推荐</el-button>
+              <el-button @click="selectQuestionAnsweringAssistantModel" :class="buttonColorChange === '问答助手' ? 'becomeSkyblue' : 'becomeWhite'">问答助手(默认)</el-button>
             </div>
           </div>
         </div>
@@ -92,6 +92,7 @@ export default {
   components: { TextLoading },
   data () {
     return {
+      buttonColorChange:'问答助手',
       isLoadingText: false,
       modelType: '问答助手',
       responseText: [],
@@ -167,8 +168,8 @@ export default {
         content: this.tempInputValue,
         is_robot: 1
       })
-      const resp = await this.getChatGPTResponse()
-      // const resp = this.gpt()
+      // const resp = await this.getChatGPTResponse()
+      const resp = this.gpt()
       console.log(resp)
       this.answer.push({
         role: 'system',
@@ -286,12 +287,15 @@ export default {
 
     // 模型选择
     selectChatGPTModel () {
+      this.buttonColorChange = 'ChatGPT'
       this.modelType = 'ChatGPT'
     },
     selectPositionRecommendationModel () {
+      this.buttonColorChange = '职位推荐'
       this.modelType = '职位推荐'
     },
     selectQuestionAnsweringAssistantModel () {
+      this.buttonColorChange = '问答助手'
       this.modelType = '问答助手'
     },
     handleMouseEnter (event) {
@@ -498,4 +502,7 @@ export default {
   border: 1px solid transparent;
 }
 
+.becomeSkyblue{
+  background-color: skyblue;
+}
 </style>

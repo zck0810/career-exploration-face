@@ -142,7 +142,7 @@ export default {
         const positionCount = res.data
         let positionCountData = []
         positionCount.forEach(item => {
-          positionCountData.push({name:item.position,value:item.count})
+          positionCountData.push({name:item.category,value:item.total})
         })
         this.config.data = positionCountData
         this.config = { ...this.config }
