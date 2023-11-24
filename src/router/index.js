@@ -31,10 +31,11 @@ const routes = [
     component: () => import('../views/newChatgpt.vue')
   },
   {
-    path: '/Recommend',
-    name: '/Recommend',
-    component: () => import('../views/Recommend.vue')
-  }
+    path: '/monitorData',
+    name: '/monitorData',
+    component: () => import('../views/monitorData')
+  },
+
 ]
 
 const router = new VueRouter({

@@ -42,3 +42,25 @@ export function getEducationCount(){
     method:'get',
   })
 }
+//获取职位总数
+export function getPositionTotal(){
+  return request({
+    url:'/liepin/getPositionTotal',
+    method:'get',
+  })
+}
+//获取万元以上职位总数
+export function getHighSalaryTotal(){
+  return request({
+    url:'/liepin/getHighSalaryTotal',
+    method:'get',
+  })
+}
+//获取万元以下职位总数
+export function getLowSalaryTotal(){
+  return request({
+    url:'/liepin/getLowSalaryTotal',
+    method:'get',
+  })
+}
+

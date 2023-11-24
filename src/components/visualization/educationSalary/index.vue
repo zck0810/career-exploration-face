@@ -1,15 +1,18 @@
 <template>
   <div>
-    <div id="educationSalary" style="width: 100%; height: 33vh;margin-left: 5px;padding-top: 10px; position:relative;"> </div>
+    <div id="educationSalary" style="width: 100%; height: 32vh;margin-left: 5px;padding-top: 10px; position:relative;"> </div>
     <button @click="changeEcharts" style="position: absolute; height: 25px;width: 60px;top: 20px;right: 20px; font-size: 14px; color: rgb(255,251,0); background-color: rgba(0,216,255,0.87)" >{{changeShowText}}</button>
   </div>
 </template>
 
 <script>
-import * as echarts from 'echarts'
-import { getFreshGraduateSalary } from '@/api/freshGraduateSalary'
+  import * as echarts from 'echarts'
+  import {getFreshGraduateSalary} from '@/api/freshGraduateSalary'
+  import {getTechnicalFrequencyStatistics} from "@/api/visualization";
+  import 'echarts-wordcloud/dist/echarts-wordcloud'
+  import 'echarts-wordcloud/dist/echarts-wordcloud.min'
 
-export default {
+  export default {
   name: 'educationSalary',
   data(){
     return{
@@ -19,11 +22,37 @@ export default {
       countData2:[],
       countData3:[],
       chartDom:null,
-      changeShowText:'按城市',
+      changeShowText:'词云图',
       timer: null,  // 添加一个定时器变量
+      wordList:[],
+      textData1:'',
+      textData2:'',
+      textData3:'',
+
     }
   },
   async mounted () {
+    getTechnicalFrequencyStatistics().then(res=>{
+      const technologyAndCount = res.data
+      const {technology: technology1} = technologyAndCount[0];
+      this.textData1=technology1
+      const {technology: technology2} = technologyAndCount[1];
+      this.textData2=technology2
+      const {technology: technology3} = technologyAndCount[2];
+      this.textData3=technology3
+      this.wordList = technologyAndCount.map(item => {
+        const {
+          count,
+          technology
+        } = item
+        return {
+          name: technology,
+          value: count
+        };
+      });
+      this.initChart();
+    })
+
    await getFreshGraduateSalary().then(res=>{
         const  tempData = res.data
         tempData.forEach(item=>{
@@ -71,23 +100,25 @@ export default {
           }
         })})
 
-    this.initEducationSalaryEcharts()
 
-    this.timer = setInterval(this.changeEcharts, 8000);
   },
   methods:{
     changeEcharts(){
       this.initEcharts()
     },
     initEcharts(){
-        if(this.changeShowText === '按城市'){
+        if(this.changeShowText === '词云图'){
           this.changeShowText = '按时间'
           echarts.dispose(this.chartDom);
           this.initEducationSalaryDataWithCity()
-        }else {
+        }else if(this.changeShowText === '按时间'){
           this.changeShowText = '按城市'
           echarts.dispose(this.chartDom);
           this.initEducationSalaryEcharts()
+        }else {
+          this.changeShowText = '词云图'
+          echarts.dispose(this.chartDom);
+          this.initChart()
         }
     },
 
@@ -129,7 +160,7 @@ export default {
           },
           axisLabel: {
             fontSize: 12, // 设置 x 轴字体大小为 14
-            rotate: 30 // 将文字旋转90度，使其竖着展示
+            rotate: 20 // 将文字旋转90度，使其竖着展示
           }
         },
         yAxis: {
@@ -258,16 +289,106 @@ export default {
         myChart.resize();
       });
       observer.observe(EducationSalaryDataWithCity);
+    },
+
+    initChart(){
+      this.chartDom = document.getElementById('educationSalary')
+      const myChart = echarts.init(this.chartDom)
+      let option = {
+        backgroundColor: 'rgba(15,55,95,0.18)',
+        title: {
+          text: '技术栈要求词云图',
+          left: 'center', // 设置标题居中
+          top: 8, // 设置距离顶部 10px
+          textStyle: {
+            color:  'rgb(0,255,234)',
+          }
+        },
+        tooltip: {
+          trigger: 'item',
+        },
+        textStyle:{
+          top: '30',
+          color: function() {
+            return (
+              "rgb(" +
+              Math.round(Math.random() * 255) +
+              ", " +
+              Math.round(Math.random() * 255) +
+              ", " +
+              Math.round(Math.random() * 255) +
+              ")"
+            );
+          }
+        },
+        graphic: [
+          {
+            type: 'group',
+            // rotation: Math.PI / 10,
+            bounding: 'raw',
+            right: 260,
+            // center:10,
+            bottom: 60,
+            z: 100,
+            children: [
+              {
+                type: 'rect',
+                left: 'center',
+                top: 'center',
+                z: 100,
+                shape: {
+                  width: 500,
+                  height: 50
+                },
+                style: {
+                  fill: 'rgba(0,0,0,0.2)'
+                }
+              },
+              {
+                type: 'text',
+                left:"center",
+                top: 'center',
+                z: 100,
+                style: {
+                  fill: 'gold',
+                  text: '解读：技术栈频次最高Top3:  ' + this.textData1 + '  ' + this.textData2 + '  ' + this.textData3,
+                  font: 'bold 20px sans-serif'
+                }
+              }
+            ]
+          },
+        ],
+        series: [
+          {
+            type: "wordCloud",
+            shape: 'circle',
+            //用来调整词之间的距离
+            gridSize: 7,
+            sizeRange: [12, 30],
+            rotationRange: [0,90],
+            // left: "center",
+            right: "20%",
+            top: "center",
+            width: "200%",
+            height: "200%",
+            data: this.wordList
+          }
+        ]
+      };
+      option && myChart.setOption(option);
+      const wordCloud = document.querySelector('#educationSalary')
+      //放置 获取DOM 节点时 去监听
+      const observer = new ResizeObserver(() => {
+        myChart.resize();
+      });
+      observer.observe(wordCloud);   //错误
     }
+
   },
 
   beforeDestroy() {
     if (this.chartDom) {
       echarts.dispose(this.chartDom);
-    }
-    // 清除定时器
-    if (this.timer) {
-      clearInterval(this.timer);
     }
   },
 }

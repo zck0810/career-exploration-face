@@ -8,6 +8,13 @@ export function getCompanyData(data) {
    data:data
  })
 }
+//查询公司总数
+export function getCompanyTotal() {
+ return request({
+   url:'/company/getCompanyTotal',
+   method:'get',
+ })
+}
 
 //查询公司数据
 export function getHighCompanyInformation(data1) {
