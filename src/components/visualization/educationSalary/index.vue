@@ -1,7 +1,8 @@
 <template>
   <div>
     <div id="educationSalary" style="width: 100%; height: 32vh;margin-left: 5px;padding-top: 10px; position:relative;"> </div>
-    <button @click="changeEcharts" style="position: absolute; height: 25px;width: 60px;top: 20px;right: 20px; font-size: 14px; color: rgb(255,251,0); background-color: rgba(0,216,255,0.87)" >{{changeShowText}}</button>
+    <button @click="changeEcharts" style="position: absolute; height: 25px;width: 60px;top: 20px;right: 20px; font-size: 14px;
+    color: rgb(255,251,0); background-color: rgba(0,216,255,0.87)" >{{changeShowText}}</button>
   </div>
 </template>
 
@@ -324,10 +325,8 @@
         graphic: [
           {
             type: 'group',
-            // rotation: Math.PI / 10,
             bounding: 'raw',
             right: 260,
-            // center:10,
             bottom: 60,
             z: 100,
             children: [
@@ -352,7 +351,7 @@
                 style: {
                   fill: 'gold',
                   text: '解读：技术栈频次最高Top3:  ' + this.textData1 + '  ' + this.textData2 + '  ' + this.textData3,
-                  font: 'bold 20px sans-serif'
+                  font: 'bold 20px sans-serif',
                 }
               }
             ]
@@ -393,5 +392,3 @@
   },
 }
 </script>
-
-

@@ -1,6 +1,6 @@
 <template>
-  <div class="boxnav">
-    <div class="yqlist">
+  <div class="boxNav">
+    <div class="yqList">
       <ul class="clearfix">
         <li>
           <div class="yq" id="yq">{{companyNumber}}</div>
@@ -69,46 +69,58 @@
 </script>
 
 <style scoped>
+*{
+  margin: 0;
+  padding: 0;
+}
   @font-face {
     font-family: electronicFont;
     src: url("@/img/DS-DIGIT.TTF")
   }
-  .boxnav {
-    padding:10px 10px 10px 0;
+  .boxNav {
+    height: 97%;
+    width: 97%;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
   }
 
-  .clearfix:after,
-  .clearfix:before {
-    display: table;
-    content: " "
+  .clearfix{
+    position: absolute;
+    top: 2px;
+    bottom: -10px;
+    left: 1px;
+    right: 1px;
+    border-radius: 20px;
+    background-color: rgba(15,55,95,0.18);
   }
 
-  .clearfix:after {
-    clear: both
-  }
 
-  .yqlist li {
+  .yqList li {
     float: left;
-    width: 110px;
+    width: 20%;
     text-align: center;
-    margin-top:20px;
+    margin-top:30px;
+    padding: 10px;
+    margin-left: 2px;
   }
 
   .yq {
-    width: 100px;
-    height: 100px;
+    width: 13vh;
+    height: 13vh;
     margin: 10px auto 10px auto;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 35px;
-    font-family: electronicFont;
+    font-family: electronicFont,serif;
     color: #fff32b;
   }
 
-  .yqlist li span {
-    /*opacity: .6;*/
+  .yqList li span {
     font-size: 16px;
     color: #fff;
   }
@@ -124,7 +136,7 @@
     opacity: .6;
     left: 0;
     top: 0;
-    animation: myfirst2 15s infinite linear;
+    animation: myFirst2 15s infinite linear;
   }
 
   .yq:after {
@@ -138,17 +150,17 @@
     content: "";
     left: 7%;
     top: 7%;
-    animation: myfirst 15s infinite linear;
+    animation: myFirst 15s infinite linear;
   }
 
 
-  @keyframes myfirst {
+  @keyframes myFirst {
     to {
       transform: rotate(-360deg)
     }
   }
 
-  @keyframes myfirst2 {
+  @keyframes myFirst2 {
     to {
       transform: rotate(360deg)
     }

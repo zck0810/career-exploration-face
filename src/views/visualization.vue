@@ -2,7 +2,7 @@
   <div class="visualization-container">
     <div class="title">
       <!--      上右下左-->
-      <h2 style="color:rgba(255,255,255,0.91);margin:0;font-size: 24px">基于大模型的职探AI小助手</h2>
+      <h2 style="color:rgb(0,216,255);margin:0;font-size: 30px">基于大模型的职探AI小助手</h2>
     </div>
     <el-row class="row-class">
       <el-col :span="8" class="col-container">
@@ -80,7 +80,7 @@
         lineTitle: '热门城市岗位数量',
         config: {
           rowNum: 10,
-          data: []
+          data: [],
         },
         cityList: [],
         countList: [],
@@ -149,7 +149,7 @@
           const positionCount = res.data
           let positionCountData = []
           positionCount.forEach(item => {
-            positionCountData.push({name: item.position, value: item.count})
+            positionCountData.push({name: item.category, value: item.total})
           })
           this.config.data = positionCountData
           this.config = {...this.config}
@@ -276,7 +276,7 @@
             five_hundred_to_thousand
           } = tempCompanyScale
           this.companyScale.push({name: '50人以下', value: less_than_fifty})
-          this.companyScale.push({name: '500-100人', value: fifty_to_hundred})
+          this.companyScale.push({name: '50-100人', value: fifty_to_hundred})
           this.companyScale.push({name: '100-500人', value: hundred_to_five_hundred})
           this.companyScale.push({name: '500-1000人', value: five_hundred_to_thousand})
           this.companyScale.push({name: '1000-5000人', value: thousand_to_five_thousand})

@@ -124,6 +124,9 @@ export default {
         },
         {
           exampleText: '如何提高自己在计算机行业中的竞争力，提升编程的思维还是别的？'
+        },
+        {
+          exampleText: '有没有考研的必要？'
         },]
     }
   },
@@ -168,8 +171,8 @@ export default {
         content: this.tempInputValue,
         is_robot: 1
       })
-      // const resp = await this.getChatGPTResponse()
-      const resp = this.gpt()
+      const resp = await this.getChatGPTResponse()
+      // const resp = this.gpt()
       console.log(resp)
       this.answer.push({
         role: 'system',
@@ -234,7 +237,10 @@ export default {
       })
 
       if (!response.ok) {
-        throw new Error('网络请求错误')
+        return {
+          content: 'API已过期',
+          is_robot: 0
+        }
       }
       const json = await response.json()
       return {
@@ -244,7 +250,7 @@ export default {
     }, // 调用ChatGPT接口响应数据
     gpt () {
       return {
-        content: '\n1. 首先，建立正确的学习态度，把学习当作一项重要的工作，不断提升自己的知识水平。\n\n2. 根据自己的兴趣爱好，选择合适的课程，认真学习，深入理解。\n\n3. 熟悉Java语言的基础知识，学习Java的开发框架，如Spring、Struts等，提高自己的编程能力。\n\n4. 熟悉常；烦恼妄想，忧苦身心；便遭浊辱，流浪生死，常沉苦海，永失真道。真常之道，悟者自得。得悟道者，常清静矣。',
+        content: 'API已过期',
         is_robot: 0
       }
     }, // 模拟测试ChatGPT回答
@@ -272,7 +278,7 @@ export default {
             questionList: tempGuidedQuestionList
           })
           this.isLoadingText = false
-        }, 5000);
+        }, 1000);
       })
 
 
