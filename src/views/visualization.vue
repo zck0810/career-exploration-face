@@ -24,7 +24,7 @@
       </el-col>
 
       <el-col :span="9" class="col-container">
-        <el-row style="height:20%;margin-bottom: 3px">
+        <el-row style="height:20%;">
           <div class="visual_conTop">
             <div class="visual_conTop_box visual_conTop1">
               <div>
@@ -65,8 +65,7 @@
         </el-row>
         <el-row style="height: 80%;">
           <dv-border-box-8>
-            <myMap>
-            </myMap>
+            <myMap></myMap>
           </dv-border-box-8>
         </el-row>
       </el-col>
@@ -357,7 +356,7 @@ export default {
         title: {                      // 添加标题
           text: this.selectedCity + '公司规模占比',      // 标题内容
           textStyle: {
-            color: 'yellow'           // 标题文字颜色
+            color: '#20dbfd'           // 标题文字颜色
           },
           left: 'center'              // 标题居中显示
         },
@@ -482,7 +481,7 @@ export default {
 
   .visual_conTop .visual_conTop_box > div .conTop_smil {
     width: 64%;
-    height: 60px;
+    height: 20px;
     float: left;
     padding-top: 23px;
     margin-top: -30px;
@@ -559,7 +558,7 @@ export default {
   top: 15px;
   left: 5%;
   font-size: 18px;
-  color: yellow;
+  color: #20dbfd;
   font-weight: bold;
 
 }

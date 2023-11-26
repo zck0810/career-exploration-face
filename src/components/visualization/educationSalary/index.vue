@@ -349,7 +349,7 @@
                 top: 'center',
                 z: 100,
                 style: {
-                  fill: 'gold',
+                  fill: '#20dbfd',
                   text: '解读：技术栈频次最高Top3:  ' + this.textData1 + '  ' + this.textData2 + '  ' + this.textData3,
                   font: 'bold 20px sans-serif',
                 }
