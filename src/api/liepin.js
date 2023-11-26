@@ -64,3 +64,11 @@ export function getLowSalaryTotal(){
   })
 }
 
+//获取万元以下职位总数
+export function getPositionRecommendationData(data){
+  return request({
+    url:'/liepin/getPositionRecommendationData',
+    method:'post',
+    data:data
+  })
+}
