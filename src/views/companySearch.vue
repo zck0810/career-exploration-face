@@ -299,8 +299,8 @@
   .content {
     width: 96%;
     text-align: center;
-    height: calc(100vh - 154px);
-    max-height: calc(100vh - 158px);
+    /*height: calc(100vh - 154px);*/
+    /*max-height: calc(100vh - 158px);*/
     margin: 10px auto;
   }
 

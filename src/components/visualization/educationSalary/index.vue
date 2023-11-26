@@ -109,11 +109,11 @@
     },
     initEcharts(){
         if(this.changeShowText === '词云图'){
-          this.changeShowText = '按时间'
+          this.changeShowText = '城市'
           echarts.dispose(this.chartDom);
           this.initEducationSalaryDataWithCity()
-        }else if(this.changeShowText === '按时间'){
-          this.changeShowText = '按城市'
+        }else if(this.changeShowText === '城市'){
+          this.changeShowText = '学历'
           echarts.dispose(this.chartDom);
           this.initEducationSalaryEcharts()
         }else {
@@ -336,11 +336,11 @@
                 top: 'center',
                 z: 100,
                 shape: {
-                  width: 500,
+                  width:650,
                   height: 50
                 },
                 style: {
-                  fill: 'rgba(0,0,0,0.2)'
+                  fill: 'rgba(0,0,0,0.1)'
                 }
               },
               {

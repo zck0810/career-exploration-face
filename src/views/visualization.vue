@@ -24,11 +24,50 @@
       </el-col>
 
       <el-col :span="9" class="col-container">
-        <el-row style="height: 100%;">
-          <dv-border-box-1>
+        <el-row style="height:20%;margin-bottom: 3px">
+          <div class="visual_conTop">
+            <div class="visual_conTop_box visual_conTop1">
+              <div>
+                <h3>Java开发工程师</h3>
+                <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
+                <p>12000</p>
+                <span style="color: white;float: left;margin: 10px 0 0 35px">(元 /月)</span>
+                <div class="conTop_smil">
+                  <a class="sz">岗位数量:<span>10983</span><i class="fa fa-long-arrow-up"></i></a>
+
+                </div>
+              </div>
+            </div>
+            <div class="visual_conTop_box visual_conTop1">
+              <div>
+                <h3>前端开发工程师</h3>
+                <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
+                <p>10000</p>
+                <span style="color: white;float: left;margin: 10px 0 0 35px">(元 /月)</span>
+                <div class="conTop_smil">
+                  <a class="sz">岗位数量:<span>10097</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="visual_conTop_box visual_conTop2">
+              <div>
+                <h3>C++开发工程师</h3>
+                <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
+                <p>15000</p>
+                <span style="color: white;float: left;margin: 10px 0 0 35px">(元 /月)</span>
+                <div class="conTop_smil">
+                  <a class="sz">岗位数量:<span>5604</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </el-row>
+        <el-row style="height: 80%;">
+          <dv-border-box-8>
             <myMap>
             </myMap>
-          </dv-border-box-1>
+          </dv-border-box-8>
         </el-row>
       </el-col>
 
@@ -43,6 +82,8 @@
                   <option value="北京">北京</option>
                   <option value="上海">上海</option>
                   <option value="深圳">深圳</option>
+                  <option value="南京">南京</option>
+                  <option value="杭州">杭州</option>
                   <option value="广州">广州</option>
                 </select>
                 <dv-scroll-ranking-board :config="config" class="scroll-ranking"/>
@@ -357,8 +398,98 @@
   }
 </script>
 
-
 <style scoped>
+  .visual_conTop {
+    height: 130px;
+    margin-bottom: 10px;
+  }
+
+  .visual_conTop .visual_conTop_box {
+    height: 100%;
+    padding: 0 3px;
+  }
+
+  .visual_conTop .visual_conTop1 {
+    width: 32%;
+    height: 100%;
+    float: left;
+  }
+
+  .visual_conTop .visual_conTop1 > div {
+    background: url("../img/ksh39.png") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .visual_conTop .visual_conTop2 {
+    width: 32%;
+    height: 100%;
+    float: left;
+  }
+
+  .visual_conTop .visual_conTop2 > div {
+    background: url("../img/ksh39.png") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .visual_conTop .visual_conTop_box > div {
+    height: 100%;
+  }
+
+  .visual_conTop .visual_conTop_box > div h3 {
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 0 0 0;
+
+  }
+
+  .visual_conTop .visual_conTop_box > div p {
+    width: 33%;
+    float: left;
+    line-height: 0;
+    color: #20dbfd;
+    text-shadow: 0 0 25px #00d8ff;
+    font-size: 44px;
+    font-family: 'yjsz';
+    text-align: right;
+    margin-top: 20px;
+  }
+
+  @font-face {
+    font-family: yjsz;
+    src: url("../img/yjsz.TTF")
+  }
+
+  .visual_conTop .visual_conTop_box > div .conTop_smil {
+    width: 64%;
+    height: 60px;
+    float: left;
+    padding-top: 23px;
+    margin-top: -30px;
+  }
+
+  .visual_conTop .visual_conTop_box > div .conTop_smil a {
+    display: block;
+    line-height: 20px;
+    text-align: right;
+    color: #fff;
+    padding-left: 9px;
+    font-size: 15px;
+  }
+
+  .visual_conTop .visual_conTop_box > div .conTop_smil span {
+    width: 32px;
+    display: inline-block;
+    margin-left: 3px;
+  }
+
+  .visual_conTop .visual_conTop_box > div .conTop_smil a.sz {
+    color: #12fe81;
+  }
+
+  .visual_conTop .visual_conTop_box > div .conTop_smil a.xd {
+    color: #12fe81;
+
+  }
 
   .title {
     height: 40px;
@@ -366,7 +497,7 @@
     background-image: url("../img/topbg.png");
     background-size: cover;
     background-position: center;
-    padding-top: 10px;
+    padding-top: 5px;
   }
 
   .visualization-container {
