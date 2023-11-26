@@ -1343,16 +1343,7 @@ export default {
     }
   },
 
-  mounted () {
-    this.test()
-  },
-
   methods: {
-    test () {
-
-    },
-
-    //text为一段描述文字
     printExampleText (text) {
       this.inputValue = text
       this.tempInputValue = text
@@ -1525,30 +1516,6 @@ export default {
           alert('获取数据失败')
         }
       })
-
-      /* getRecommendData(inputValue).then(res => {
-        const {
-          code,
-          data
-        } = res
-        if (code === 20000) {
-          if (data.length < 1) {
-            this.isLoadingText = false
-            this.responseText.push({
-              content: '赞无职位推荐，请更换描述或需求',
-              is_robot: 2
-            })
-          } else {
-            this.isLoadingText = false
-            this.responseText.push({
-              content: data,
-              is_robot: 2
-            })
-          }
-        } else {
-          alert('获取数据失败')
-        }
-      }) */
     },
 
     async getChatGPTResponse () {
