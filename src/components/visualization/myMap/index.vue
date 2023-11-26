@@ -1,25 +1,75 @@
 <template>
   <div class="content">
-    <div id="charts" ref="charts"
-         style="width: 98%; height: 83vh;margin-left: 7px;padding-top: 10px; position:relative;">
+    <div style="position: absolute;left: 30px">
+      <h2 style="color: whitesmoke;font-size: 26px">各省市岗位分布</h2>
     </div>
-      <span style="color: white;font-size: 22px; position: absolute; top: 8px; left:38%;">各省市岗位分布</span>
-    <div class="bar">
-      <div class="barbox">
-        <span style="color: white;margin-right:300px">薪资最高Top3岗位</span>
-        <ul class="clearfix">
-          <li class="pulll_left counter" style="font-size: 40px">1942</li>
-          <li class="pulll_left counter" style="font-size: 40px">98612</li>
-          <li class="pulll_left counter" style="font-size: 40px">2091</li>
-        </ul>
-        <ul class="clearfix">
-          <li class="pulll_left">字段名称</li>
-          <li class="pulll_left">字段名称</li>
-          <li class="pulll_left">字段名称</li>
-        </ul>
+    <div id="charts" ref="charts"
+         style="width: 98%; height: 68vh;margin-left: 7px;padding-top: 10px; position:relative;">
+    </div>
+    <div class="visual_chart sfzcll" style="position:absolute;">
+      <a>岗位排名</a>
+      <a>城市</a>
+      <a>岗位数量</a>
+      <div class="sfzcll_pos_box">
+        <div class="sfzcll_box">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <label><img src="@/img/icona.png">1</label>
+          <div class="sfzcll_smallBk">
+            <div class="ygl">
+              <span>广东</span>
+            </div>
+          </div>
+          <div class="sfzcll_smallBk">
+            <div class="ygh">
+              <span>15116</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="sfzcll_box">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <label><img src="@/img/icona.png">2</label>
+          <div class="sfzcll_smallBk">
+            <div class="ygl">
+              <span>江苏</span>
+            </div>
+          </div>
+          <div class="sfzcll_smallBk">
+            <div class="ygh">
+              <span>10829</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="sfzcll_box">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <img class="sfzcll_bkJk" src="@/img/ksh34.png">
+          <label><img src="@/img/icona.png">3</label>
+          <div class="sfzcll_smallBk">
+            <div class="ygl">
+              <span>北京</span>
+            </div>
+          </div>
+          <div class="sfzcll_smallBk">
+            <div class="ygh">
+              <span>8103</span>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </div>
       </div>
+
     </div>
   </div>
+
 </template>
 <script>
   import * as echarts from 'echarts'
@@ -63,7 +113,7 @@
       initCharts() {
         const charts = echarts.init(this.$refs["charts"]);
         const option = {
-          backgroundColor: 'rgba(15,55,95,0.29)',
+          backgroundColor: 'rgba(15,55,95,0.07)',
           // echarts 图表选项配置
           title: {
             text: '',
@@ -84,7 +134,7 @@
             min: 0,
             max: 20000,
             left: '20px', // 向右移动 30px
-            top: 'bottom',
+            bottom: '10px',
             text: ['高', '低'],
             pieces: [
               {
@@ -122,8 +172,8 @@
                 color: '#e603ef'
               },
             ],
-            itemWidth: 50,
-            itemHeight: 20,
+            itemWidth: 40,
+            itemHeight: 15,
             showLabel: true,
             textStyle: {
               color: 'white',
@@ -135,8 +185,8 @@
               type: 'map',
               mapType: 'china',
               left: 'center',
-              top: 180,
-              zoom: 1.2,
+              top: 90,
+              zoom: 1.3,
               roam: true,
               label: {
                 normal: {
@@ -215,78 +265,109 @@
 </script>
 
 <style>
-  .bar {
+  .visual_chart {
+    width: 60%;
+    height: 24%;
     position: absolute;
-    top: 30px;
-    width: 93%;
-    background: rgba(101, 132, 226, 0);
-    padding: 20px;
-  }
-
-  li {
-    list-style-type: none;
-  }
-
-  .barbox li {
-    width: 33.33333%;
-    text-align: center;
-    position: relative;
-  }
-
-  .barbox:before,
-  .barbox:after {
-    position: absolute;
-    width: 30px;
-    height: 20px;
-    content: "";
-  }
-
-  .barbox:before {
-    border-left: 2px solid #02a6b5;
-    left: 0;
-    border-top: 2px solid #02a6b5;
-  }
-
-  .barbox:after {
-    border-right: 2px solid #02a6b5;
-    right: 0;
     bottom: 0;
-    border-bottom: 2px solid #02a6b5;
+    right: 10px;
+    opacity: 0.7;
+
   }
 
-  .barbox li:before {
+  .visual_chart_text h1 {
+    font-size: 26px;
+    margin-bottom: 6px;
+  }
+
+  .visual_chart_text h2 {
+    font-size: 20px;
+  }
+
+  .sfzcll a {
+    width: 32%;
+    text-align: center;
+    line-height: 25px;
+    color: #fff;
+    display: inline-block;
+  }
+
+  .sfzcll .sfzcll_pos_box {
+    width: 100%;
+    height: calc(100% - 30px);
+  }
+
+  .sfzcll .sfzcll_box {
+    width: 100%;
+    height:31%;
+    line-height: 0;
+    background: rgba(15, 47, 72, 0.8);
+    border: 1px solid #1380bd;
+  }
+
+  .sfzcll .sfzcll_box:last-of-type {
+    margin: 0;
+  }
+
+  .sfzcll .sfzcll_box .sfzcll_bkJk {
     position: absolute;
-    content: "";
-    height: 50%;
-    width: 1px;
-    background: rgba(255, 255, 255, .2);
-    right: 0;
-    top: 25%;
   }
 
-  .barbox {
-    border: 2px solid rgba(25, 186, 139, .17);
-    position: relative;
+  .sfzcll .sfzcll_box .sfzcll_bkJk:first-of-type {
+    top: -2px;
+    left: -2px;
   }
 
-  .barbox li {
-    color: #ffeb7b;
-    padding: -10px;
-    font-weight: bold;
-    font-family: electronicFont;
+  .sfzcll .sfzcll_box .sfzcll_bkJk:nth-child(2) {
+    top: -2px;
+    right: -2px;
   }
 
-  .clearfix:after, .clearfix:before {
-    display: table;
-    content: " "
+  .sfzcll .sfzcll_box .sfzcll_bkJk:nth-child(3) {
+    bottom: -2px;
+    right: -2px;
   }
 
-  .clearfix:after {
-    clear: both
+  .sfzcll .sfzcll_box .sfzcll_bkJk:nth-child(4) {
+    bottom: -2px;
+    left: -2px;
   }
 
-  .pulll_left {
+  .sfzcll .sfzcll_box label {
+    width: 33%;
+    color: #fff;
+    line-height: 0;
+    text-align: center;
     float: left;
   }
 
+  .sfzcll .sfzcll_box label img {
+    width: 23px;
+    height: 23px;
+    margin-right: 5px;
+    margin-top: 2px;
+  }
+
+  .sfzcll .sfzcll_box .sfzcll_smallBk {
+    width: 30%;
+    height: 100%;
+    float: left;
+    padding: 2px 5px;
+  }
+
+  .sfzcll .sfzcll_box .sfzcll_smallBk > div {
+    height: 100%;
+    background: url("@/img/ksh38.png") no-repeat;
+    background-size: 100% 80%;
+    text-align: center;
+    line-height: 30px;
+  }
+
+  .sfzcll .sfzcll_box .sfzcll_smallBk .ygl {
+    color: #00ffc6;
+  }
+
+  .sfzcll .sfzcll_box .sfzcll_smallBk .ygh {
+    color: #ffe400;
+  }
 </style>

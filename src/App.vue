@@ -2,17 +2,18 @@
   <div id="app">
     <nav>
       <div style="margin-left: 20px;">
-        <router-link to="/">首页</router-link>
+        <router-link to="/">综合信息可视化 <i class="el-icon-s-home"></i></router-link>
+
         |
-        <router-link to="/jobSearch">职位查询</router-link>
+        <router-link to="/jobSearch">职位查询 <i class="el-icon-location"></i></router-link>
         |
-        <router-link to="/companySearch">公司查询</router-link>
+        <router-link to="/companySearch">公司查询 <i class="el-icon-s-platform"></i></router-link>
 <!--        <router-link to="/ChatGPT">AI问答助手老版</router-link>-->
         |
-        <router-link to="/newChatgpt">AI问答助手</router-link>
+        <router-link to="/newChatgpt">AI问答助手 <i class="el-icon-s-custom"></i></router-link>
 <!--        <router-link to="/Recommend">职位推荐</router-link>-->
         <span
-          style="float: right; margin-right: 30px; color: black; font-size: 20px">当前系统访问量为：{{ visitCount }}</span>
+          style="float: right; margin-right: 30px; color: black; font-size: 20px">当前系统访问量为：{{ visitCount }} <i class="el-icon-user"></i></span>
       </div>
     </nav>
     <router-view
