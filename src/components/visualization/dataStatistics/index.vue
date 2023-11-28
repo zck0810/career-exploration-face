@@ -1,5 +1,8 @@
 <template>
   <div class="boxNav">
+    <div class="yqList0">
+      <h2 style="color: skyblue">系统数据统计</h2>
+    </div>
     <div class="yqList">
       <ul class="clearfix">
         <li>
@@ -30,11 +33,11 @@
   export default {
     name: "index",
     data() {
-      return{
-        companyNumber:'',
-        positionNumber:'',
-        HighPositionNumber:'',
-        LowPositionNumber:'',
+      return {
+        companyNumber: '',
+        positionNumber: '',
+        HighPositionNumber: '',
+        LowPositionNumber: '',
       }
     },
     mounted() {
@@ -43,23 +46,23 @@
       this.getHighSalaryNum()
       this.getLowSalaryNum()
     },
-    methods:{
-       getTotalCompanyNum(){
+    methods: {
+      getTotalCompanyNum() {
         getCompanyTotal().then(res => {
           this.companyNumber = res.data
         })
       },
-       getTotalPositionNum(){
+      getTotalPositionNum() {
         getPositionTotal().then(res => {
           this.positionNumber = res.data
         })
       },
-      getHighSalaryNum(){
+      getHighSalaryNum() {
         getHighSalaryTotal().then(res => {
           this.HighPositionNumber = res.data
         })
       },
-      getLowSalaryNum(){
+      getLowSalaryNum() {
         getLowSalaryTotal().then(res => {
           this.LowPositionNumber = res.data
         })
@@ -69,14 +72,16 @@
 </script>
 
 <style scoped>
-*{
-  margin: 0;
-  padding: 0;
-}
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
   @font-face {
     font-family: electronicFont;
     src: url("@/img/DS-DIGIT.TTF")
   }
+
   .boxNav {
     height: 97%;
     width: 97%;
@@ -87,14 +92,20 @@
     position: relative;
   }
 
-  .clearfix{
+  .yqList0 {
+  position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  .clearfix {
     position: absolute;
     top: 2px;
     bottom: -10px;
     left: 1px;
     right: 1px;
     border-radius: 20px;
-    background-color: rgba(15,55,95,0.18);
+    background-color: rgba(15, 55, 95, 0.18);
   }
 
 
@@ -102,7 +113,7 @@
     float: left;
     width: 20%;
     text-align: center;
-    margin-top:30px;
+    margin-top: 30px;
     padding: 10px;
     margin-left: 2px;
   }
@@ -116,7 +127,7 @@
     justify-content: center;
     align-items: center;
     font-size: 35px;
-    font-family: electronicFont,serif;
+    font-family: electronicFont, serif;
     color: #fff32b;
   }
 
