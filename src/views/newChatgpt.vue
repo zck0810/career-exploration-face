@@ -54,11 +54,11 @@
                     </div>
                     <div v-else>
                       <span>根据你的描述，为你推荐岗位如下</span><br>
-                      <div style="height: 100%;width: 100%;margin-bottom: 5px" v-for="item in item.content">
-                        <span style="margin-right: 100px;width: 500px;">岗位名称：{{ item.position }}</span>
-                        <span style="margin-right: 100px;width: 500px;">所在城市：{{ item.city }}</span>
-                        <span><a :href="item.href" target="_blank">查看详情</a></span>
-                      </div>
+                      <el-row style="height: 100%;width: 100%;margin-bottom: 5px" v-for="item in item.content">
+                        <el-col :span="10" >岗位名称：{{ item.position }}</el-col>
+                        <el-col :span="8" >所在城市：{{ item.city }}</el-col>
+                        <el-col :span="6" ><a :href="item.href" target="_blank">查看详情</a></el-col>
+                      </el-row>
                     </div>
                   </div>
                   <!--   is_robot === 3 问答助手-->
@@ -100,9 +100,9 @@
     components: {TextLoading},
     data() {
       return {
-        buttonColorChange: '问答助手',
+        buttonColorChange: '职位推荐',
         isLoadingText: false,
-        modelType: '问答助手',
+        modelType: '职位推荐',
         responseText: [],
         guidedQuestionListLength: 1,
         answer: [],
@@ -1178,9 +1178,7 @@
           '雁峰区',
           '伊金霍洛',
           '齐河县'], //城市列表
-        positionList: ['前端开发工程师',
-          'Web前端开发工程师',
-          'web前端开发工程师',
+        positionList: [
           '前端开发',
           'c语言开发工程师',
           'C语言开发工程师',
@@ -1189,8 +1187,8 @@
           'java开发工程师',
           'java开发',
           '算法工程师',
-          'C\\+\\+开发工程师',
-          'c\\+\\+开发工程师',
+          'C\\+\\+开发',
+          'c\\+\\+开发',
           'PHP开发工程师',
           'Python开发工程师',
           'Python开发',
