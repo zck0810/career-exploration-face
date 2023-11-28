@@ -75,7 +75,7 @@
           <dv-border-box-13>
             <div>
               <div class="hotPosition">
-                <label class="labelClass">岗位数量排名Top30：</label>
+                <label class="labelClass">岗位数量排名Top10：</label>
                 <select class="citySelect" v-model="selectedCity" @change="changeCity">
                   <option value="全国">全国</option>
                   <option value="北京">北京</option>
@@ -119,8 +119,9 @@ export default {
       selectedCity: '全国', // 默认选择全国
       lineTitle: '热门城市岗位数量',
       config: {
-        rowNum: 10,
+        rowNum: 11,
         data: [],
+        waitTime:99999999,
       },
       cityList: [],
       countList: [],
