@@ -1516,12 +1516,14 @@
                   is_robot: 2
                 })
               } else {
-                this.isLoadingText = false
                 const truncatedData = data.slice(0, 30);
-                this.responseText.push({
-                  content: truncatedData,
-                  is_robot: 2
-                });
+                setTimeout(() => {
+                  this.responseText.push({
+                    content: truncatedData,
+                    is_robot: 2,
+                  })
+                  this.isLoadingText = false
+                }, 3000)
               }
             } else {
               alert('获取数据失败')
@@ -1594,7 +1596,7 @@
               questionList: tempGuidedQuestionList
             })
             this.isLoadingText = false
-          }, 1000)
+          }, 3000)
         })
 
       },
