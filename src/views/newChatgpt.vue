@@ -50,7 +50,7 @@
                   <!--   is_robot === 2 职位推荐-->
                   <div style="height: 100%;width: 100%;" v-else-if="item.is_robot === 2">
                     <div v-if="item.content === '赞无职位推荐，请更换描述或需求'">
-                      <span>赞无职位推荐，请更换描述或需求</span>
+                      <span>赞无职位推荐，提示：输入带有关键词（比如想要找的职位、岗位所在城市、薪资，学历、会什么技术等）的描述推荐会更准确哦！</span>
                     </div>
                     <div v-else>
                       <span>根据你的描述，为你推荐岗位如下</span><br>
@@ -1495,31 +1495,40 @@
           experience: experience,
           technologies: technologies
         }
-        console.log(data)
-        getPositionRecommendationData(data).then(res => {
-          const {
-            code,
-            data
-          } = res
-          if (code === 20000) {
-            if (data.length < 1) {
-              this.isLoadingText = false
-              this.responseText.push({
-                content: '赞无职位推荐，请更换描述或需求',
-                is_robot: 2
-              })
+        if(positions.length === 0 && cities.length === 0 && salaries.length === 0 &&
+          technologies.length === 0 && education === null && experience ===null){
+          this.isLoadingText = false
+          this.responseText.push({
+            content: '赞无职位推荐，请更换描述或需求',
+            is_robot: 2
+          })
+        }else {
+          getPositionRecommendationData(data).then(res => {
+            const {
+              code,
+              data
+            } = res
+            if (code === 20000) {
+              if (data.length < 1) {
+                this.isLoadingText = false
+                this.responseText.push({
+                  content: '赞无职位推荐，请更换描述或需求',
+                  is_robot: 2
+                })
+              } else {
+                this.isLoadingText = false
+                const truncatedData = data.slice(0, 30);
+                this.responseText.push({
+                  content: truncatedData,
+                  is_robot: 2
+                });
+              }
             } else {
-              this.isLoadingText = false
-              const truncatedData = data.slice(0, 30);
-              this.responseText.push({
-                content: truncatedData,
-                is_robot: 2
-              });
+              alert('获取数据失败')
             }
-          } else {
-            alert('获取数据失败')
-          }
-        })
+          })
+        }
+
       },
 
       async getChatGPTResponse() {
@@ -1538,7 +1547,7 @@
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer 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' // 请替换为您的API-KEY
+            Authorization: 'Bearer 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' // 请替换为您的API-KEY
           },
           body: JSON.stringify(data)
         })
