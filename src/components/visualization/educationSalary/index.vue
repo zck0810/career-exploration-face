@@ -302,7 +302,7 @@
           left: 'center', // 设置标题居中
           top: 8, // 设置距离顶部 10px
           textStyle: {
-            color:  'rgb(0,255,234)',
+            color:  '#20dbfd',
           }
         },
         tooltip: {

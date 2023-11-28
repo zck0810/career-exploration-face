@@ -1,7 +1,7 @@
 <template>
   <div class="boxNav">
     <div class="yqList0">
-      <h2 style="color: skyblue">系统数据统计</h2>
+      <h2 style="color: #20dbfd">系统数据概况</h2>
     </div>
     <div class="yqList">
       <ul class="clearfix">

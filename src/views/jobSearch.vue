@@ -291,7 +291,7 @@
     height: calc(100vh - 194px);
     max-height: calc(100vh - 198px);
     margin: 10px auto;
-    /*overflow-y: auto;*/
+
   }
 
   a {
@@ -301,10 +301,5 @@
 </style>
 
 <style>
-  .el-select{
-      margin-right:20px ;
-  }
-  .el-select-dropdown__wrap {
-    max-height: 260px;
-  }
+
 </style>
