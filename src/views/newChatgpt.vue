@@ -22,10 +22,10 @@
                          :class="buttonColorChange === 'ChatGPT' ? 'becomeSkyblue' : 'becomeWhite'">ChatGPT
               </el-button>
               <el-button @click="selectPositionRecommendationModel"
-                         :class="buttonColorChange === '职位推荐' ? 'becomeSkyblue' : 'becomeWhite'">职位推荐
+                         :class="buttonColorChange === '职位推荐' ? 'becomeSkyblue' : 'becomeWhite'">职位推荐(默认)
               </el-button>
               <el-button @click="selectQuestionAnsweringAssistantModel"
-                         :class="buttonColorChange === '问答助手' ? 'becomeSkyblue' : 'becomeWhite'">问答助手(默认)
+                         :class="buttonColorChange === '问答助手' ? 'becomeSkyblue' : 'becomeWhite'">问答助手
               </el-button>
             </div>
           </div>
@@ -50,15 +50,15 @@
                   <!--   is_robot === 2 职位推荐-->
                   <div style="height: 100%;width: 100%;" v-else-if="item.is_robot === 2">
                     <div v-if="item.content === '赞无职位推荐，请更换描述或需求'">
-                      <span>赞无职位推荐，请更换描述或需求</span>
+                      <span>赞无职位推荐，提示：输入带有关键词（比如想要找的职位、岗位所在城市、薪资，学历、会什么技术等）的描述推荐会更准确哦！</span>
                     </div>
                     <div v-else>
                       <span>根据你的描述，为你推荐岗位如下</span><br>
-                      <div style="height: 100%;width: 100%;margin-bottom: 5px" v-for="item in item.content">
-                        <span style="margin-right: 100px;width: 500px;">岗位名称：{{ item.position }}</span>
-                        <span style="margin-right: 100px;width: 500px;">所在城市：{{ item.city }}</span>
-                        <span><a :href="item.href" target="_blank">查看详情</a></span>
-                      </div>
+                      <el-row style="height: 100%;width: 100%;margin-bottom: 5px" v-for="item in item.content">
+                        <el-col :span="10" >岗位名称：{{ item.position }}</el-col>
+                        <el-col :span="8" >所在城市：{{ item.city }}</el-col>
+                        <el-col :span="6" ><a :href="item.href" target="_blank">查看详情</a></el-col>
+                      </el-row>
                     </div>
                   </div>
                   <!--   is_robot === 3 问答助手-->
@@ -100,9 +100,9 @@
     components: {TextLoading},
     data() {
       return {
-        buttonColorChange: '问答助手',
+        buttonColorChange: '职位推荐',
         isLoadingText: false,
-        modelType: '问答助手',
+        modelType: '职位推荐',
         responseText: [],
         guidedQuestionListLength: 1,
         answer: [],
@@ -1178,9 +1178,7 @@
           '雁峰区',
           '伊金霍洛',
           '齐河县'], //城市列表
-        positionList: ['前端开发工程师',
-          'Web前端开发工程师',
-          'web前端开发工程师',
+        positionList: [
           '前端开发',
           'c语言开发工程师',
           'C语言开发工程师',
@@ -1189,8 +1187,8 @@
           'java开发工程师',
           'java开发',
           '算法工程师',
-          'C\\+\\+开发工程师',
-          'c\\+\\+开发工程师',
+          'C\\+\\+开发',
+          'c\\+\\+开发',
           'PHP开发工程师',
           'Python开发工程师',
           'Python开发',
@@ -1497,31 +1495,42 @@
           experience: experience,
           technologies: technologies
         }
-        console.log(data)
-        getPositionRecommendationData(data).then(res => {
-          const {
-            code,
-            data
-          } = res
-          if (code === 20000) {
-            if (data.length < 1) {
-              this.isLoadingText = false
-              this.responseText.push({
-                content: '赞无职位推荐，请更换描述或需求',
-                is_robot: 2
-              })
+        if(positions.length === 0 && cities.length === 0 && salaries.length === 0 &&
+          technologies.length === 0 && education === null && experience ===null){
+          this.isLoadingText = false
+          this.responseText.push({
+            content: '赞无职位推荐，请更换描述或需求',
+            is_robot: 2
+          })
+        }else {
+          getPositionRecommendationData(data).then(res => {
+            const {
+              code,
+              data
+            } = res
+            if (code === 20000) {
+              if (data.length < 1) {
+                this.isLoadingText = false
+                this.responseText.push({
+                  content: '赞无职位推荐，请更换描述或需求',
+                  is_robot: 2
+                })
+              } else {
+                const truncatedData = data.slice(0, 30);
+                setTimeout(() => {
+                  this.responseText.push({
+                    content: truncatedData,
+                    is_robot: 2,
+                  })
+                  this.isLoadingText = false
+                }, 3000)
+              }
             } else {
-              this.isLoadingText = false
-              const truncatedData = data.slice(0, 30);
-              this.responseText.push({
-                content: truncatedData,
-                is_robot: 2
-              });
+              alert('获取数据失败')
             }
-          } else {
-            alert('获取数据失败')
-          }
-        })
+          })
+        }
+
       },
 
       async getChatGPTResponse() {
@@ -1540,7 +1549,7 @@
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer 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' // 请替换为您的API-KEY
+            Authorization: 'Bearer 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' // 请替换为您的API-KEY
           },
           body: JSON.stringify(data)
         })
@@ -1587,7 +1596,7 @@
               questionList: tempGuidedQuestionList
             })
             this.isLoadingText = false
-          }, 1000)
+          }, 3000)
         })
 
       },
@@ -1817,7 +1826,7 @@
   }
 
   .becomeSkyblue {
-    background-color: skyblue;
+    background-color: rgba(0, 216, 255, 0.51);
   }
 </style>
 
