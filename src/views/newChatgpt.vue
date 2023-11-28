@@ -22,10 +22,10 @@
                          :class="buttonColorChange === 'ChatGPT' ? 'becomeSkyblue' : 'becomeWhite'">ChatGPT
               </el-button>
               <el-button @click="selectPositionRecommendationModel"
-                         :class="buttonColorChange === '职位推荐' ? 'becomeSkyblue' : 'becomeWhite'">职位推荐
+                         :class="buttonColorChange === '职位推荐' ? 'becomeSkyblue' : 'becomeWhite'">职位推荐(默认)
               </el-button>
               <el-button @click="selectQuestionAnsweringAssistantModel"
-                         :class="buttonColorChange === '问答助手' ? 'becomeSkyblue' : 'becomeWhite'">问答助手(默认)
+                         :class="buttonColorChange === '问答助手' ? 'becomeSkyblue' : 'becomeWhite'">问答助手
               </el-button>
             </div>
           </div>
@@ -1824,7 +1824,7 @@
   }
 
   .becomeSkyblue {
-    background-color: skyblue;
+    background-color: rgba(0, 216, 255, 0.51);
   }
 </style>
 
