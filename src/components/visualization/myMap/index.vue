@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div style="position: absolute;left: 30px">
-      <h2 style="color: whitesmoke;font-size: 26px">各省市岗位分布</h2>
+      <h2 style="color: #20dbfd;font-size: 26px">各省市岗位分布</h2>
     </div>
     <div id="charts" ref="charts"
          style="width: 98%; height: 68vh;margin-left: 7px;padding-top: 10px; position:relative;">
