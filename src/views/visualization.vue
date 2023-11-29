@@ -35,7 +35,7 @@
                   <h3>Java开发工程师</h3>
                   <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
                   <p>12000</p>
-                  <span style="color: white;float: left;margin: 10px 0 0 35px">(元 /月)</span>
+                  <span style="color: white;float: left;margin: 0 0 0 35px">(元 /月)</span>
                   <div class="conTop_smil">
                     <a class="sz">岗位数量:<span>10983</span><i class="fa fa-long-arrow-up"></i></a>
                   </div>
@@ -46,7 +46,7 @@
                   <h3>前端开发工程师</h3>
                   <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
                   <p>10000</p>
-                  <span style="color: white;float: left;margin: 10px 0 0 35px">(元 /月)</span>
+                  <span style="color: white;float: left;margin: 0 0 0 35px">(元 /月)</span>
                   <div class="conTop_smil">
                     <a class="sz">岗位数量:<span>10097</span></a>
                   </div>
@@ -57,7 +57,7 @@
                   <h3>C++开发工程师</h3>
                   <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
                   <p>15000</p>
-                  <span style="color: white;float: left;margin: 10px 0 0 35px">(元 /月)</span>
+                  <span style="color: white;float: left;margin: 0 0 0 35px">(元 /月)</span>
                   <div class="conTop_smil">
                     <a class="sz">岗位数量:<span>5604</span></a>
                   </div>
@@ -79,7 +79,7 @@
           <dv-border-box-13>
             <div>
               <div class="hotPosition">
-                <label class="labelClass">岗位数量排名Top30：</label>
+                <label class="labelClass">岗位数量排名Top10：</label>
                 <select class="citySelect" v-model="selectedCity" @change="changeCity">
                   <option value="全国">全国</option>
                   <option value="北京">北京</option>
@@ -123,7 +123,7 @@
         selectedCity: '全国', // 默认选择全国
         lineTitle: '热门城市岗位数量',
         config: {
-          rowNum: 10,
+          rowNum: 8,
           data: [],
           // waitTime:99999999,
         },
@@ -192,6 +192,7 @@
         const selectedCity = this.selectedCity
         getHotPosition(selectedCity).then(res => {
           const positionCount = res.data
+          console.log(positionCount)
           let positionCountData = []
           positionCount.forEach(item => {
             positionCountData.push({

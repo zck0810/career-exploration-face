@@ -1549,7 +1549,7 @@
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer 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' // 请替换为您的API-KEY
+            Authorization: 'Bearer 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' // 请替换为您的API-KEY
           },
           body: JSON.stringify(data)
         })

@@ -301,5 +301,7 @@
 </style>
 
 <style>
-
+  .el-select{
+    margin-right: 10px;
+  }
 </style>
