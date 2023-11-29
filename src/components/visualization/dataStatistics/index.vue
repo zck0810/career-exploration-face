@@ -19,7 +19,7 @@
         </li>
         <li>
           <div class="yq">{{LowPositionNumber}}</div>
-          <span>6-10K薪资岗位数量</span>
+          <span>6-8K薪资岗位数量</span>
         </li>
       </ul>
     </div>

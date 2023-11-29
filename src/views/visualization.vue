@@ -119,7 +119,7 @@ export default {
       selectedCity: '全国', // 默认选择全国
       lineTitle: '热门城市岗位数量',
       config: {
-        rowNum: 10,
+        rowNum: 8,
         data: [],
         // waitTime:99999999,
       },
