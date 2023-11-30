@@ -1556,7 +1556,7 @@
 
         if (!response.ok) {
           return {
-            content: 'API已过期',
+            content: 'API已过期,若想继续使用此功能，请联系开发者更新API，联系方式：3027325003@qq.com',
             is_robot: 0
           }
         }
