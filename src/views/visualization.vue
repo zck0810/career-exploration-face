@@ -34,7 +34,7 @@
                 <div>
                   <h3>Java开发工程师</h3>
                   <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
-                  <p>12000</p>
+                  <p>8000</p>
                   <span style="color: white;float: left;margin: 0 0 0 35px">(元 /月)</span>
                   <div class="conTop_smil">
                     <a class="sz">岗位数量:<span>10983</span><i class="fa fa-long-arrow-up"></i></a>
@@ -45,7 +45,7 @@
                 <div>
                   <h3>前端开发工程师</h3>
                   <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
-                  <p>10000</p>
+                  <p>6000</p>
                   <span style="color: white;float: left;margin: 0 0 0 35px">(元 /月)</span>
                   <div class="conTop_smil">
                     <a class="sz">岗位数量:<span>10097</span></a>
@@ -56,7 +56,7 @@
                 <div>
                   <h3>C++开发工程师</h3>
                   <span style="color: skyblue;float: left;margin-top: -10px;font-size: 22px">￥</span>
-                  <p>15000</p>
+                  <p>10000</p>
                   <span style="color: white;float: left;margin: 0 0 0 35px">(元 /月)</span>
                   <div class="conTop_smil">
                     <a class="sz">岗位数量:<span>5604</span></a>
